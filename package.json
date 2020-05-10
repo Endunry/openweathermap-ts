@@ -10,8 +10,10 @@
   "author": "Phillip Shim",
   "license": "ISC",
   "devDependencies": {
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
+    "dotenv": "^8.2.0",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {}
 }
