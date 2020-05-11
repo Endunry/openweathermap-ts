@@ -5,11 +5,14 @@
 // api.openweathermap.org/data/2.5/weather?q={city name},{state},{country code}&appid={your api key}
 
 // Translation is applied for the city name and description fields.
-import fetch from 'node-fetch'
-import { unitTypes } from './types'
 import * as dotenv from 'dotenv'
+import fetch from 'node-fetch'
+import { unitTypes, Countries } from './types'
+import { capitalize } from './helpers'
 
 dotenv.config()
+
+type TypeQuery = 'weather' | 'forecast'
 
 interface ISettings {
   units?: unitTypes
@@ -70,10 +73,10 @@ class OpenWeatherMap {
 
   public async getCurrentWeatherByCityName(cityName: string) {
     try {
-      const { baseURL, settings } = this
+      const query = `q=${cityName}`
+      const request = this.buildURL('weather', query)
 
-      const endPoint = `${baseURL}weather?q=${cityName}&appid=${settings.apiKey}`
-      const response = await fetch(endPoint)
+      const response = await fetch(request)
       const currentWeather = await response.json()
 
       console.log(currentWeather)
@@ -85,10 +88,10 @@ class OpenWeatherMap {
 
   public async getCurrentWeatherByCityId(cityId: number) {
     try {
-      const { baseURL, settings } = this
+      const query = `id=${cityId}`
+      const request = this.buildURL('weather', query)
 
-      const endPoint = `${baseURL}weather?id=${cityId}&appid=${settings.apiKey}`
-      const response = await fetch(endPoint)
+      const response = await fetch(request)
       const currentWeather = await response.json()
 
       console.log(currentWeather)
@@ -103,10 +106,10 @@ class OpenWeatherMap {
     longitude: number
   ) {
     try {
-      const { baseURL, settings } = this
+      const query = `lat=${latitude}&lon=${longitude}`
+      const request = this.buildURL('weather', query)
 
-      const endPoint = `${baseURL}weather?lat=${latitude}&lon=${longitude}&appid=${settings.apiKey}`
-      const response = await fetch(endPoint)
+      const response = await fetch(request)
       const currentWeather = await response.json()
 
       console.log(currentWeather)
@@ -116,24 +119,31 @@ class OpenWeatherMap {
     }
   }
 
-  public async getCurrentWeatherByZipcode(
-    zipcode: number,
-    countryCode?: number
-  ) {
+  public async getCurrentWeatherByZipcode(zipcode: number, country?: string) {
     try {
-      const { baseURL, settings } = this
+      // better handling
+      const countryCode = (
+        Countries[capitalize(country)] || country
+      ).toLowerCase()
+      const query = `zip=${zipcode}${countryCode ? ',' + countryCode : ''}`
+      const request = this.buildURL('weather', query)
 
-      const endPoint = `${baseURL}weather?zip=${zipcode}${
-        countryCode ? ',' + countryCode : ''
-      }&appid=${settings.apiKey}`
-      const response = await fetch(endPoint)
+      const response = await fetch(request)
       const currentWeather = await response.json()
 
+      console.log('contry code', countryCode)
       console.log(currentWeather)
+
       return currentWeather
     } catch (error) {
       return error
     }
+  }
+
+  private buildURL(queryType: TypeQuery, query: string) {
+    const { baseURL, settings } = this
+
+    return `${baseURL + queryType}?${query}&appid=${settings.apiKey}`
   }
 }
 
@@ -147,7 +157,7 @@ console.log(newMap.setSettings('language', 'kr'))
 // newMap.getCurrentWeatherByCityName('austin')
 // newMap.getCurrentWeatherByCityId(300)
 // newMap.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
-// newMap.getCurrentWeatherByZipcode(78754)
+// newMap.getCurrentWeatherByZipcode(78754, 'UnitedStates')
 // console.log(newMap.setApiKey('qwpeorqjwe'))
 
 export default OpenWeatherMap
