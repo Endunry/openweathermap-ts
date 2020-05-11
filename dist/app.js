@@ -1,27 +1,24 @@
+"use strict";
 // pi.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
+Object.defineProperty(exports, "__esModule", { value: true });
 class OpenWeatherMap {
     constructor({ apiKey, units = 'imperial', langauge = 'en' }) {
-        this.apiKey = apiKey;
-        this.units = units;
-        this.langauge = langauge;
+        this.settings = {
+            apiKey,
+            units,
+            langauge,
+        };
     }
-    getApiKey() {
-        return this.apiKey;
-    }
-    getUnits() {
-        return this.units;
-    }
-    getLanguage() {
-        return this.langauge;
-    }
-    setApiKey(apiKey) {
-        this.apiKey = apiKey;
-        return this.apiKey;
+    getSettings(key) {
+        if (this.settings[key]) {
+            return this.settings[key];
+        }
+        return this.settings;
     }
 }
 const newMap = new OpenWeatherMap({
     apiKey: 'asdfasdfasdf',
 });
-console.log(newMap.getApiKey());
-console.log(newMap.setApiKey('qwpeorqjwe'));
+console.log(newMap.getSettings());
+// console.log(newMap.setApiKey('qwpeorqjwe'))
 //# sourceMappingURL=app.js.map

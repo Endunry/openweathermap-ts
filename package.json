@@ -4,16 +4,29 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf dist && tsc",
+    "start": "node dist/app.js",
+    "dev": "nodemon --exec ts-node src/app.ts --watch src",
+    "test": "jest --watch",
+    "coverage": "jest --coverage"
   },
   "author": "Phillip Shim",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.5",
     "dotenv": "^8.2.0",
+    "jest": "^26.0.1",
+    "nodemon": "^2.0.3",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.5.1",
+    "ts-node": "^8.10.1",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.8.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/node-fetch": "^2.5.7",
+    "node-fetch": "^2.6.0"
+  }
 }

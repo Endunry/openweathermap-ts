@@ -5,57 +5,70 @@
 // api.openweathermap.org/data/2.5/weather?q={city name},{state},{country code}&appid={your api key}
 
 // Translation is applied for the city name and description fields.
-
+import fetch from 'node-fetch'
 import { unitTypes } from './types'
+import * as dotenv from 'dotenv'
 
-interface IConfig {
-  apiKey: string
+dotenv.config()
+
+interface ISettings {
   units?: unitTypes
-  langauge?: string
+  language?: string
+  [key: string]: string
+}
+
+interface IinitialSettings extends ISettings {
+  apiKey: string
 }
 
 class OpenWeatherMap {
-  private apiKey: string
-  private units: string
-  private langauge: string
+  private settings: IinitialSettings
 
-  constructor({ apiKey, units = 'imperial', langauge = 'en' }: IConfig) {
-    this.apiKey = apiKey
-    this.units = units
-    this.langauge = langauge
+  constructor({
+    apiKey,
+    units = 'imperial',
+    language = 'en',
+  }: IinitialSettings) {
+    this.settings = {
+      apiKey,
+      units,
+      language,
+    }
   }
 
-  public getApiKey() {
-    return this.apiKey
+  public getSettings(key?: string) {
+    if (key && this.settings[key]) {
+      return this.settings[key]
+    }
+
+    if (key && !this.settings[key]) {
+      return `${key} is not found!`
+    }
+
+    return this.settings
   }
 
-  public getUnits() {
-    return this.units
-  }
+  public setSettings(key: string, value: string) {
+    if (key && this.settings[key]) {
+      this.settings[key] = value
+      return `${key} is changed to ${this.settings[key]}`
+    }
 
-  public getLanguage() {
-    return this.langauge
-  }
+    if (key && !this.settings[key]) {
+      return `${key} is not found!`
+    }
 
-  public setApiKey(apiKey: string) {
-    this.apiKey = apiKey
-    return this.apiKey
-  }
-
-  public setUnits(units: string) {
-    this.units = units
-    return this.units
-  }
-
-  public setLanguage(language: string) {
-    this.langauge = language
-    return this.langauge
+    return `Please pass in an option key with a value`
   }
 }
 
+// tests
 const newMap = new OpenWeatherMap({
-  apiKey: 'asdfasdfasdf',
+  apiKey: process.env.API_KEY,
 })
 
-console.log(newMap.getApiKey())
-console.log(newMap.setApiKey('qwpeorqjwe'))
+console.log(newMap.getSettings())
+console.log(newMap.setSettings('language', 'kr'))
+// console.log(newMap.setApiKey('qwpeorqjwe'))
+
+export default OpenWeatherMap
