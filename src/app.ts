@@ -7,7 +7,7 @@
 // Translation is applied for the city name and description fields.
 import * as dotenv from 'dotenv'
 import fetch from 'node-fetch'
-import { Units, Countries, Languages } from './types'
+import { Units, CountryCodes, Languages } from './types'
 import { capitalize } from './helpers'
 
 dotenv.config()
@@ -44,17 +44,11 @@ class OpenWeatherMap {
     this.baseURL = host + apiVersion
   }
 
-  public getSettings(key?: string) {
-    if (key && this.settings[key]) {
-      return this.settings[key]
-    }
-
-    if (key && !this.settings[key]) {
-      return `${key} is not found!`
-    }
-
-    return this.settings
-  }
+  //
+  //
+  // Setters
+  //
+  //
 
   public setApiKey(apiKey: string) {
     this.settings.apiKey = apiKey
@@ -68,7 +62,27 @@ class OpenWeatherMap {
     this.settings.language = language
   }
 
+  //
+  //
   // Getters
+  //
+  //
+
+  public getSettings(key?: string) {
+    if (key && this.settings[key]) {
+      return this.settings[key]
+    }
+
+    if (key && !this.settings[key]) {
+      return `${key} is not found!`
+    }
+
+    return this.settings
+  }
+
+  public getAllSettings() {
+    return this.settings
+  }
 
   public getCurrentWeatherByCityName(cityName: string) {
     return new Promise(async (resolve, reject) => {
@@ -161,7 +175,7 @@ const newMap = new OpenWeatherMap({
 })
 
 console.log(newMap.getSettings())
-console.log(newMap.setSettings('language', 'kr'))
+// newMap.setLanguage('aa')
 newMap.getCurrentWeatherByCityName('austin')
 // newMap.getCurrentWeatherByCityId(300)
 // newMap.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
