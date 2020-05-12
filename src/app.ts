@@ -7,7 +7,7 @@
 // Translation is applied for the city name and description fields.
 import * as dotenv from 'dotenv'
 import fetch from 'node-fetch'
-import { unitTypes, Countries } from './types'
+import { Units, Countries, Languages } from './types'
 import { capitalize } from './helpers'
 
 dotenv.config()
@@ -15,7 +15,7 @@ dotenv.config()
 type TypeQuery = 'weather' | 'forecast'
 
 interface ISettings {
-  units?: unitTypes
+  units?: Units
   language?: string
   [key: string]: string
 }
@@ -56,17 +56,16 @@ class OpenWeatherMap {
     return this.settings
   }
 
-  public setSettings(key: string, value: string) {
-    if (key && this.settings[key]) {
-      this.settings[key] = value
-      return `${key} is changed to ${this.settings[key]}`
-    }
+  public setApiKey(apiKey: string) {
+    this.settings.apiKey = apiKey
+  }
 
-    if (key && !this.settings[key]) {
-      return `${key} is not found!`
-    }
+  public setUnits(units: Units) {
+    this.settings.units = units
+  }
 
-    return `Please pass in an option key with a value`
+  public setLanguage(language: Languages) {
+    this.settings.language = language
   }
 
   // Getters
@@ -163,7 +162,7 @@ const newMap = new OpenWeatherMap({
 
 console.log(newMap.getSettings())
 console.log(newMap.setSettings('language', 'kr'))
-// newMap.getCurrentWeatherByCityName('austin')
+newMap.getCurrentWeatherByCityName('austin')
 // newMap.getCurrentWeatherByCityId(300)
 // newMap.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
 // newMap.getCurrentWeatherByZipcode(78754, 'UnitedStates')

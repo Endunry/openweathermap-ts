@@ -1,7 +1,1 @@
-export type unitTypes =
-  | 'imperial'
-  | 'metric'
-  | 'standard'
-  | 'fahrenheit'
-  | 'celsius'
-  | 'kelvin'
+export type Units = 'imperial' | 'metric' | 'standard'
