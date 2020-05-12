@@ -71,73 +71,82 @@ class OpenWeatherMap {
 
   // Getters
 
-  public async getCurrentWeatherByCityName(cityName: string) {
-    try {
-      const query = `q=${cityName}`
-      const request = this.buildURL('weather', query)
+  public getCurrentWeatherByCityName(cityName: string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `q=${cityName}`
+        const request = this.buildURL('weather', query)
 
-      const response = await fetch(request)
-      const currentWeather = await response.json()
+        const response = await fetch(request)
+        const currentWeather = await response.json()
 
-      console.log(currentWeather)
-      return currentWeather
-    } catch (error) {
-      return error
-    }
+        console.log(currentWeather)
+        resolve(currentWeather)
+      } catch (error) {
+        reject(error)
+      }
+    })
   }
 
   public async getCurrentWeatherByCityId(cityId: number) {
-    try {
-      const query = `id=${cityId}`
-      const request = this.buildURL('weather', query)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `id=${cityId}`
+        const request = this.buildURL('weather', query)
 
-      const response = await fetch(request)
-      const currentWeather = await response.json()
+        const response = await fetch(request)
+        const currentWeather = await response.json()
 
-      console.log(currentWeather)
-      return currentWeather
-    } catch (error) {
-      return error
-    }
+        console.log(currentWeather)
+        resolve(currentWeather)
+      } catch (error) {
+        reject(error)
+      }
+    })
   }
 
   public async getCurrentWeatherByGeoCoordinates(
     latitude: number,
     longitude: number
   ) {
-    try {
-      const query = `lat=${latitude}&lon=${longitude}`
-      const request = this.buildURL('weather', query)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `lat=${latitude}&lon=${longitude}`
+        const request = this.buildURL('weather', query)
 
-      const response = await fetch(request)
-      const currentWeather = await response.json()
+        const response = await fetch(request)
+        const currentWeather = await response.json()
 
-      console.log(currentWeather)
-      return currentWeather
-    } catch (error) {
-      return error
-    }
+        console.log(currentWeather)
+        resolve(currentWeather)
+      } catch (error) {
+        reject(error)
+      }
+    })
   }
 
+  // supports country name and country code
   public async getCurrentWeatherByZipcode(zipcode: number, country?: string) {
-    try {
-      // better handling
-      const countryCode = (
-        Countries[capitalize(country)] || country
-      ).toLowerCase()
-      const query = `zip=${zipcode}${countryCode ? ',' + countryCode : ''}`
-      const request = this.buildURL('weather', query)
+    return new Promise(async (resolve, reject) => {
+      try {
+        // better handling
+        const countryCode = (
+          Countries[capitalize(country)] || country
+        ).toLowerCase()
+        const query = `zip=${zipcode}${countryCode ? ',' + countryCode : ''}`
+        const request = this.buildURL('weather', query)
 
-      const response = await fetch(request)
-      const currentWeather = await response.json()
+        const response = await fetch(request)
+        const currentWeather = await response.json()
 
-      console.log('contry code', countryCode)
-      console.log(currentWeather)
+        console.log('contry code', countryCode)
+        console.log(currentWeather)
 
-      return currentWeather
-    } catch (error) {
-      return error
-    }
+        resolve(currentWeather)
+      } catch (error) {
+        reject(error)
+      }
+    })
   }
 
   private buildURL(queryType: TypeQuery, query: string) {
@@ -161,3 +170,6 @@ console.log(newMap.setSettings('language', 'kr'))
 // console.log(newMap.setApiKey('qwpeorqjwe'))
 
 export default OpenWeatherMap
+
+// object shape
+// throw new error
