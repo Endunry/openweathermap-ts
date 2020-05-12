@@ -12,30 +12,39 @@ import { capitalize } from './helpers'
 
 dotenv.config()
 
+// Todo: Response JSON object types
+
 type TypeQuery = 'weather' | 'forecast'
 
-interface ISettings {
+interface Settings {
   units?: Units
   language?: string
   [key: string]: string
 }
 
-interface IinitialSettings extends ISettings {
+interface InitialSettings extends Settings {
   apiKey: string
+}
+
+interface GetCurrentWeatherByCityName {
+  cityName: string
+  // TODO: Update state types
+  state?: string
+  countryCode?: CountryCodes
 }
 
 const host = `https://api.openweathermap.org/data/`
 const apiVersion = `2.5/`
 
 class OpenWeatherMap {
-  private settings: IinitialSettings
+  private settings: InitialSettings
   private baseURL: string
 
   constructor({
     apiKey,
     units = 'imperial',
     language = 'en',
-  }: IinitialSettings) {
+  }: InitialSettings) {
     this.settings = {
       apiKey,
       units,
@@ -84,10 +93,16 @@ class OpenWeatherMap {
     return this.settings
   }
 
-  public getCurrentWeatherByCityName(cityName: string) {
+  public getCurrentWeatherByCityName({
+    cityName,
+    state,
+    countryCode,
+  }: GetCurrentWeatherByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `q=${cityName}`
+        const query = `q=${cityName}${state ? ',' + state : ''}${
+          countryCode ? ',' + countryCode : ''
+        }`
         const request = this.buildURL('weather', query)
 
         const response = await fetch(request)
@@ -138,14 +153,12 @@ class OpenWeatherMap {
     })
   }
 
-  // supports country name and country code
-  public async getCurrentWeatherByZipcode(zipcode: number, country?: string) {
+  public async getCurrentWeatherByZipcode(
+    zipcode: number,
+    countryCode?: CountryCodes
+  ) {
     return new Promise(async (resolve, reject) => {
       try {
-        // better handling
-        const countryCode = (
-          Countries[capitalize(country)] || country
-        ).toLowerCase()
         const query = `zip=${zipcode}${countryCode ? ',' + countryCode : ''}`
         const request = this.buildURL('weather', query)
 
@@ -176,10 +189,10 @@ const newMap = new OpenWeatherMap({
 
 console.log(newMap.getSettings())
 // newMap.setLanguage('aa')
-newMap.getCurrentWeatherByCityName('austin')
+// newMap.getCurrentWeatherByCityName({ cityName: 'austin' })
 // newMap.getCurrentWeatherByCityId(300)
 // newMap.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
-// newMap.getCurrentWeatherByZipcode(78754, 'UnitedStates')
+newMap.getCurrentWeatherByZipcode(78754, 'us')
 // console.log(newMap.setApiKey('qwpeorqjwe'))
 
 export default OpenWeatherMap
