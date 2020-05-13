@@ -1,6 +1,6 @@
 // iso 3166 country codes
 
-export type CountryCodes =
+export type CountryCode =
   | 'af'
   | 'ax'
   | 'al'

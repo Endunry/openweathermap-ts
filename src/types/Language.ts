@@ -1,4 +1,4 @@
-export type Languages =
+export type Language =
   | 'af'
   | 'al'
   | 'ar'
