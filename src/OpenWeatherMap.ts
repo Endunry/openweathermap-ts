@@ -20,8 +20,25 @@ interface InitialSettings extends Settings {
   apiKey: string
 }
 
+interface Location {
+  city: {
+    cityName?: string
+    state?: string
+    countryCode?: CountryCode
+  }
+  cityId?: number
+  geoCoordinates: {
+    latitude?: number
+    longitude?: number
+  }
+  zipCode: {
+    zipCode?: number
+    countryCode?: string
+  }
+}
+
 interface GetCurrentWeatherByCityName {
-  cityName: string
+  cityName?: string
   // TODO: Update state types
   state?: string
   countryCode?: CountryCode
@@ -33,6 +50,7 @@ const apiVersion = `2.5/`
 class OpenWeatherMap {
   private settings: InitialSettings
   private baseURL: string
+  private location: Location
 
   constructor({
     apiKey,
@@ -43,6 +61,12 @@ class OpenWeatherMap {
       apiKey,
       units,
       language,
+    }
+    this.location = {
+      city: {},
+      cityId: undefined,
+      geoCoordinates: {},
+      zipCode: {},
     }
     this.baseURL = host + apiVersion
   }
@@ -65,6 +89,39 @@ class OpenWeatherMap {
     this.settings.language = language
   }
 
+  public setCityName({
+    cityName,
+    state,
+    countryCode,
+  }: GetCurrentWeatherByCityName) {
+    this.location.city = {
+      ...this.location.city,
+      cityName,
+      state,
+      countryCode,
+    }
+  }
+
+  public setCityId(cityId: number) {
+    this.location.cityId = cityId
+  }
+
+  public setGeoCoordinates(latitude: number, longitude: number) {
+    this.location.geoCoordinates = {
+      ...this.location.geoCoordinates,
+      latitude,
+      longitude,
+    }
+  }
+
+  public setZipCode(zipCode: number, countryCode?: CountryCode) {
+    this.location.zipCode = {
+      ...this.location.zipCode,
+      zipCode,
+      countryCode,
+    }
+  }
+
   // ***
   // ***
   // Getters
@@ -75,17 +132,27 @@ class OpenWeatherMap {
     return this.settings
   }
 
+  public getAllLocations() {
+    return this.location
+  }
+
   // ***
   // ***
   // Private
   // ***
   // ***
 
-  protected buildURL(queryType: QueryType, query: string) {
+  private buildURL(queryType: QueryType, query: string) {
     const { baseURL, settings } = this
 
     return `${baseURL + queryType}?${query}&appid=${settings.apiKey}`
   }
+
+  // ***
+  // ***
+  // protected
+  // ***
+  // ***
 
   protected getByCityName(
     { cityName, state, countryCode }: GetCurrentWeatherByCityName,
@@ -93,11 +160,22 @@ class OpenWeatherMap {
   ) {
     return new Promise(async (resolve, reject) => {
       try {
+        const { location, buildURL } = this
+
+        if (!cityName || !location.city.cityName) {
+          throw new Error(
+            `cityName missing, please pass it via argument or set it using setCityName method`
+          )
+        }
+
+        cityName = cityName || location.city.cityName
+        state = state || location.city.state
+        countryCode = countryCode || location.city.countryCode
+
         const query = `q=${cityName}${state ? ',' + state : ''}${
           countryCode ? ',' + countryCode : ''
         }`
-
-        const request = this.buildURL(queryType, query)
+        const request = buildURL(queryType, query)
 
         const response = await fetch(request)
         const currentWeather = await response.json()
@@ -113,8 +191,18 @@ class OpenWeatherMap {
   protected getByCityId(cityId: number, queryType: QueryType) {
     return new Promise(async (resolve, reject) => {
       try {
+        const { location, buildURL } = this
+
+        if (!cityId || !location.cityId) {
+          throw new Error(
+            `cityId missing, please pass it via argument or set it using setCityId method`
+          )
+        }
+
+        cityId = cityId || this.location.cityId
+
         const query = `id=${cityId}`
-        const request = this.buildURL(queryType, query)
+        const request = buildURL(queryType, query)
 
         const response = await fetch(request)
         const currentWeather = await response.json()
@@ -134,6 +222,16 @@ class OpenWeatherMap {
   ) {
     return new Promise(async (resolve, reject) => {
       try {
+        const { location, buildURL } = this
+
+        if (!la || !location.cityId) {
+          throw new Error(
+            `cityId missing, please pass it via argument or set it using setCityId method`
+          )
+        }
+
+        cityId = cityId || this.location.cityId
+
         const query = `lat=${latitude}&lon=${longitude}`
         const request = this.buildURL(queryType, query)
 
@@ -176,6 +274,13 @@ class OpenWeatherMap {
 const newMap = new OpenWeatherMap({
   apiKey: process.env.API_KEY,
 })
+
+newMap.setCityName({
+  cityName: 'austin',
+  countryCode: 'us',
+})
+
+console.log(newMap.getAllLocations())
 
 export default OpenWeatherMap
 

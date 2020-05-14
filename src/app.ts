@@ -5,7 +5,7 @@ const WEATHER = 'weather'
 const FORECAST = 'forecast'
 
 interface GetCurrentWeatherByCityName {
-  cityName: string
+  cityName?: string
   // TODO: Update state types
   state?: string
   countryCode?: CountryCode
@@ -34,7 +34,7 @@ class OpenWeather extends OpenWeatherMap {
     })
   }
 
-  public async getCurrentWeatherByCityId(cityId: number) {
+  public async getCurrentWeatherByCityId(cityId?: number) {
     return new Promise(async (resolve, reject) => {
       try {
         const currentWeather = this.getByCityId(cityId, WEATHER)
@@ -154,9 +154,9 @@ class OpenWeather extends OpenWeatherMap {
 const openWeather = new OpenWeather({ apiKey: process.env.API_KEY })
 
 // openWeather.setLanguage('aa')
-openWeather
-  .getCurrentWeatherByCityName({ cityName: 'austin' })
-  .then((data) => console.log('data', data))
+// openWeather
+//   .getCurrentWeatherByCityName({ cityName: 'austin' })
+//   .then((data) => console.log('data', data))
 // openWeather.getCurrentWeatherByCityId(833)
 // openWeather.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
 // openWeather.getCurrentWeatherByZipcode(78754, 'us')
