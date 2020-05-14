@@ -46,8 +46,8 @@ class OpenWeather extends OpenWeatherMap {
   }
 
   public async getCurrentWeatherByGeoCoordinates(
-    latitude: number,
-    longitude: number
+    latitude?: number,
+    longitude?: number
   ) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -152,6 +152,14 @@ class OpenWeather extends OpenWeatherMap {
 }
 
 const openWeather = new OpenWeather({ apiKey: process.env.API_KEY })
+
+const execute = async () => {
+  await openWeather.getCurrentWeatherByCityId(833)
+  openWeather.setCityId(833)
+  await openWeather.getCurrentWeatherByCityId()
+}
+
+execute()
 
 // openWeather.setLanguage('aa')
 // openWeather
