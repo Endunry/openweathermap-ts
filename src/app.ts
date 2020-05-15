@@ -12,21 +12,13 @@ interface GetCurrentWeatherByCityName {
 }
 
 class OpenWeather extends OpenWeatherMap {
-  public getCurrentWeatherByCityName({
-    cityName,
-    state,
-    countryCode,
-  }: GetCurrentWeatherByCityName) {
+  public getCurrentWeatherByCityName(location?: GetCurrentWeatherByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = await this.getByCityName(
-          {
-            cityName,
-            state,
-            countryCode,
-          },
-          WEATHER
-        )
+        const currentWeather = await this.getByCityName({
+          location,
+          queryType: WEATHER,
+        })
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -80,21 +72,13 @@ class OpenWeather extends OpenWeatherMap {
     })
   }
 
-  public getThreeHourForecastByCityName({
-    cityName,
-    state,
-    countryCode,
-  }: GetCurrentWeatherByCityName) {
+  public getThreeHourForecastByCityName(location: GetCurrentWeatherByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = await this.getByCityName(
-          {
-            cityName,
-            state,
-            countryCode,
-          },
-          FORECAST
-        )
+        const currentWeather = await this.getByCityName({
+          location,
+          queryType: FORECAST,
+        })
 
         console.log(currentWeather)
         resolve(currentWeather)
@@ -154,9 +138,18 @@ class OpenWeather extends OpenWeatherMap {
 const openWeather = new OpenWeather({ apiKey: process.env.API_KEY })
 
 const execute = async () => {
-  await openWeather.getCurrentWeatherByCityId(833)
-  openWeather.setCityId(833)
-  await openWeather.getCurrentWeatherByCityId()
+  // await openWeather.getCurrentWeatherByCityId(833)
+  // openWeather.setCityId(833)
+  // await openWeather.getCurrentWeatherByCityId()
+
+  try {
+    openWeather.setCityName({
+      cityName: 'austin',
+    })
+    await openWeather.getCurrentWeatherByCityName()
+  } catch (error) {
+    console.log('catch error', error)
+  }
 }
 
 execute()
@@ -175,3 +168,5 @@ execute()
 // openWeather.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
 // openWeather.getCurrentWeatherByZipcode(78754, 'us')
 // console.log(openWeather.setApiKey('qwpeorqjwe'))
+
+export default OpenWeather

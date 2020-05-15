@@ -37,11 +37,22 @@ interface Location {
   }
 }
 
+interface SetCurrentWeatherByCityName {
+  cityName: string
+  // TODO: Update state types
+  state?: string
+  countryCode?: CountryCode
+}
 interface GetCurrentWeatherByCityName {
   cityName?: string
   // TODO: Update state types
   state?: string
   countryCode?: CountryCode
+}
+
+interface GetByCityName {
+  location?: GetCurrentWeatherByCityName
+  queryType: QueryType
 }
 
 const host = `https://api.openweathermap.org/data/`
@@ -94,7 +105,7 @@ class OpenWeatherMap {
     cityName,
     state,
     countryCode,
-  }: GetCurrentWeatherByCityName) {
+  }: SetCurrentWeatherByCityName) {
     this.location.city = {
       ...this.location.city,
       cityName,
@@ -120,6 +131,23 @@ class OpenWeatherMap {
       ...this.location.zipcode,
       zipcode,
       countryCode,
+    }
+  }
+
+  public clearSettings() {
+    this.settings = {
+      ...this.settings,
+      units: 'imperial',
+      language: 'en',
+    }
+  }
+
+  public clearLocation() {
+    this.location = {
+      city: {},
+      cityId: undefined,
+      geoCoordinates: {},
+      zipcode: {},
     }
   }
 
@@ -155,23 +183,20 @@ class OpenWeatherMap {
   // ***
   // ***
 
-  protected getByCityName(
-    { cityName, state, countryCode }: GetCurrentWeatherByCityName,
-    queryType: QueryType
-  ) {
+  protected getByCityName({ location, queryType }: GetByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
-        const { location } = this
-
-        if (!cityName || !location.city.cityName) {
+        // it's possible that argument is missing and set location is missing too
+        if (!location?.cityName && !this.location.city.cityName) {
           throw new Error(
             `cityName missing, please pass it via argument or set it using setCityName method`
           )
         }
 
-        cityName = cityName || location.city.cityName
-        state = state || location.city.state
-        countryCode = countryCode || location.city.countryCode
+        const cityName = location?.cityName || this.location.city.cityName
+        const state = location?.state || this.location.city.state
+        const countryCode =
+          location?.countryCode || this.location.city.countryCode
 
         const query = `q=${cityName}${state ? ',' + state : ''}${
           countryCode ? ',' + countryCode : ''
