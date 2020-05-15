@@ -9,6 +9,7 @@ dotenv.config()
 // Todo: Response JSON object types
 // Todo: CityID validations
 // Todo: geoCoordinate types
+// should countryCodes be uppercase? how about states?
 
 interface Settings {
   units?: Unit
@@ -57,7 +58,6 @@ interface GetByCityName {
 
 const host = `https://api.openweathermap.org/data/`
 const apiVersion = `2.5/`
-const base = host + apiVersion
 
 class OpenWeatherMap {
   private settings: InitialSettings
@@ -136,7 +136,7 @@ class OpenWeatherMap {
 
   public clearSettings() {
     this.settings = {
-      ...this.settings,
+      apiKey: 'youNeedValidApiKey',
       units: 'imperial',
       language: 'en',
     }

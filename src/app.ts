@@ -137,22 +137,22 @@ class OpenWeather extends OpenWeatherMap {
 
 const openWeather = new OpenWeather({ apiKey: process.env.API_KEY })
 
-const execute = async () => {
-  // await openWeather.getCurrentWeatherByCityId(833)
-  // openWeather.setCityId(833)
-  // await openWeather.getCurrentWeatherByCityId()
+// const execute = async () => {
+//   // await openWeather.getCurrentWeatherByCityId(833)
+//   // openWeather.setCityId(833)
+//   // await openWeather.getCurrentWeatherByCityId()
 
-  try {
-    openWeather.setCityName({
-      cityName: 'austin',
-    })
-    await openWeather.getCurrentWeatherByCityName()
-  } catch (error) {
-    console.log('catch error', error)
-  }
-}
+//   try {
+//     openWeather.setCityName({
+//       cityName: 'austin',
+//     })
+//     await openWeather.getCurrentWeatherByCityName()
+//   } catch (error) {
+//     console.log('catch error', error)
+//   }
+// }
 
-execute()
+// execute()
 
 // openWeather.setLanguage('aa')
 // openWeather

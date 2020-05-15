@@ -10,10 +10,10 @@ describe(`testing`, () => {
 
   // test creating an instance without api key
 
-  it.only(`tests getCurrentWeatherByCityName`, async () => {
-    // openWeather.getAllLocations()
-    expect(async () => await openWeather.getCurrentWeatherByCityName()).toThrow()
-  })
+//   it(`tests getCurrentWeatherByCityName`, async () => {
+//     // openWeather.getAllLocations()
+//     expect(openWeather.getCurrentWeatherByCityName).toThrow()
+//   })
 
   //   it(`getSettings with arguments should return corresponding value`, () => {
   //     expect(openWeather.getSettings('units')).toBe('imperial')
