@@ -4,15 +4,20 @@ import { Unit, CountryCode, Language, QueryType } from './types'
 const WEATHER = 'weather'
 const FORECAST = 'forecast'
 
-interface GetCurrentWeatherByCityName {
+interface GetByCityName {
   cityName?: string
   // TODO: Update state types
   state?: string
   countryCode?: CountryCode
 }
 
+interface GetByGeoCoordinates {
+  latitude?: number
+  longitude?: number
+}
+
 class OpenWeather extends OpenWeatherMap {
-  public getCurrentWeatherByCityName(location?: GetCurrentWeatherByCityName) {
+  public getCurrentWeatherByCityName(location?: GetByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
         const currentWeather = await this.getByCityName({
@@ -29,7 +34,7 @@ class OpenWeather extends OpenWeatherMap {
   public async getCurrentWeatherByCityId(cityId?: number) {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = this.getByCityId(cityId, WEATHER)
+        const currentWeather = this.getByCityId({ cityId, queryType: WEATHER })
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -43,13 +48,12 @@ class OpenWeather extends OpenWeatherMap {
   ) {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = await this.getByGeoCoordinates(
+        const currentWeather = await this.getByGeoCoordinates({
           latitude,
           longitude,
-          WEATHER
-        )
+          queryType: FORECAST,
+        })
 
-        console.log(currentWeather)
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -72,7 +76,7 @@ class OpenWeather extends OpenWeatherMap {
     })
   }
 
-  public getThreeHourForecastByCityName(location?: GetCurrentWeatherByCityName) {
+  public getThreeHourForecastByCityName(location?: GetByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
         const currentWeather = await this.getByCityName({
@@ -88,10 +92,10 @@ class OpenWeather extends OpenWeatherMap {
     })
   }
 
-  public getThreeHourForecastByCityId(cityId: number) {
+  public getThreeHourForecastByCityId(cityId?: number) {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = this.getByCityId(cityId, FORECAST)
+        const currentWeather = this.getByCityId({ cityId, queryType: FORECAST })
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -100,18 +104,17 @@ class OpenWeather extends OpenWeatherMap {
   }
 
   public getThreeHourForecastByGeoCoordinates(
-    latitude: number,
-    longitude: number
+    latitude?: number,
+    longitude?: number
   ) {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = await this.getByGeoCoordinates(
+        const currentWeather = await this.getByGeoCoordinates({
           latitude,
           longitude,
-          FORECAST
-        )
+          queryType: FORECAST,
+        })
 
-        console.log(currentWeather)
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -138,15 +141,22 @@ class OpenWeather extends OpenWeatherMap {
 const openWeather = new OpenWeather({ apiKey: process.env.API_KEY })
 
 // const execute = async () => {
-//   // await openWeather.getCurrentWeatherByCityId(833)
-//   // openWeather.setCityId(833)
-//   // await openWeather.getCurrentWeatherByCityId()
-
+//   // try {
+//   //   openWeather.setCityName({
+//   //     cityName: 'austin',
+//   //   })
+//   //   await openWeather.getCurrentWeatherByCityName()
+//   // } catch (error) {
+//   //   console.log('catch error', error)
+//   // }
+//   // try {
+//   //   openWeather.setCityId(833)
+//   //   await openWeather.getCurrentWeatherByCityId()
+//   // } catch (error) {
+//   //   console.log('catch error', error)
+//   // }
 //   try {
-//     openWeather.setCityName({
-//       cityName: 'austin',
-//     })
-//     await openWeather.getCurrentWeatherByCityName()
+//     await openWeather.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
 //   } catch (error) {
 //     console.log('catch error', error)
 //   }

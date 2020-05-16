@@ -44,16 +44,26 @@ interface SetCurrentWeatherByCityName {
   state?: string
   countryCode?: CountryCode
 }
-interface GetCurrentWeatherByCityName {
-  cityName?: string
-  // TODO: Update state types
-  state?: string
-  countryCode?: CountryCode
+
+interface IQueryType {
+  queryType: QueryType
+}
+interface GetByCityName extends IQueryType {
+  location?: {
+    cityName?: string
+    // TODO: Update state types
+    state?: string
+    countryCode?: CountryCode
+  }
 }
 
-interface GetByCityName {
-  location?: GetCurrentWeatherByCityName
-  queryType: QueryType
+interface GetByCityId extends IQueryType {
+  cityId?: number
+}
+
+interface GetByGeoCoordinates extends IQueryType {
+  latitude?: number
+  longitude?: number
 }
 
 const host = `https://api.openweathermap.org/data/`
@@ -214,7 +224,7 @@ class OpenWeatherMap {
     })
   }
 
-  protected getByCityId(cityId: number, queryType: QueryType) {
+  protected getByCityId({ cityId, queryType }: GetByCityId) {
     return new Promise(async (resolve, reject) => {
       try {
         const { location } = this
@@ -225,7 +235,7 @@ class OpenWeatherMap {
           )
         }
 
-        cityId = cityId || this.location.cityId
+        cityId = cityId || location.cityId
 
         const query = `id=${cityId}`
         const request = this.buildURL(queryType, query)
@@ -241,27 +251,25 @@ class OpenWeatherMap {
     })
   }
 
-  protected getByGeoCoordinates(
-    latitude: number,
-    longitude: number,
-    queryType: QueryType
-  ) {
+  protected getByGeoCoordinates({
+    latitude,
+    longitude,
+    queryType,
+  }: GetByGeoCoordinates) {
     return new Promise(async (resolve, reject) => {
       try {
-        const { location } = this
-
         if (
           (!latitude || !longitude) &&
-          (!location.geoCoordinates.latitude ||
-            !location.geoCoordinates.longitude)
+          (!this.location.geoCoordinates.latitude ||
+            !this.location.geoCoordinates.longitude)
         ) {
           throw new Error(
             `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
           )
         }
 
-        latitude = latitude || location.geoCoordinates.latitude
-        longitude = longitude || location.geoCoordinates.longitude
+        latitude = latitude || this.location.geoCoordinates.latitude
+        longitude = longitude || this.location.geoCoordinates.longitude
 
         const query = `lat=${latitude}&lon=${longitude}`
         const request = this.buildURL(queryType, query)
@@ -269,9 +277,10 @@ class OpenWeatherMap {
         const response = await fetch(request)
         const currentWeather = await response.json()
 
-        console.log(currentWeather)
+        console.log('success', currentWeather)
         resolve(currentWeather)
       } catch (error) {
+        console.log('error', error)
         reject(error)
       }
     })

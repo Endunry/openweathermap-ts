@@ -7,7 +7,7 @@ describe(`Tests Get Methods in app.ts`, () => {
   const openWeather = new OpenWeather({
     apiKey: process.env.API_KEY,
   })
-  
+
   describe(`Tests implementation of getByCityName`, () => {
     it(`should test getCurrentWeatherByCityName throws without an argument or setLocation`, async () => {
       try {
@@ -19,7 +19,6 @@ describe(`Tests Get Methods in app.ts`, () => {
       }
     })
 
-    //   test creating an instance without api key
     it(`should test getThreeHourForecastByCityName throws without an argument or setLocation`, async () => {
       try {
         await openWeather.getThreeHourForecastByCityName()
@@ -32,23 +31,53 @@ describe(`Tests Get Methods in app.ts`, () => {
   })
 
   describe(`Tests implementation of getByCityId`, () => {
-    it(`should test getCurrentWeatherByCityName throws without an argument or setLocation`, async () => {
+    it(`should test getCurrentWeatherByCityId throws without an argument or setLocation`, async () => {
       try {
-        await openWeather.getCurrentWeatherByCityName()
+        await openWeather.getCurrentWeatherByCityId()
       } catch (error) {
         expect(error.message).toBe(
-          'cityName missing, please pass it via argument or set it using setCityName method'
+          `cityId missing, please pass it via argument or set it using setCityId method`
         )
       }
     })
 
-    //   test creating an instance without api key
-    it(`should test getThreeHourForecastByCityName throws without an argument or setLocation`, async () => {
+    it(`should test getThreeHourForecastByCityId throws without an argument or setLocation`, async () => {
       try {
-        await openWeather.getThreeHourForecastByCityName()
+        await openWeather.getThreeHourForecastByCityId()
       } catch (error) {
         expect(error.message).toBe(
-          'cityName missing, please pass it via argument or set it using setCityName method'
+          `cityId missing, please pass it via argument or set it using setCityId method`
+        )
+      }
+    })
+  })
+
+  describe(`Tests implementation of getByGeoCoordinates`, () => {
+    it.skip(`should test getCurrentWeatherByCityId throws without an argument or setLocation`, async () => {
+      try {
+        await openWeather.getCurrentWeatherByGeoCoordinates()
+      } catch (error) {
+        expect(error.message).toBe(
+          `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
+        )
+      }
+    })
+    it(`should test getCurrentWeatherByGeoCoordinates throws with only one latitude as argument`, async () => {
+      try {
+        await openWeather.getCurrentWeatherByGeoCoordinates(30.2672)
+      } catch (error) {
+        expect(error.message).toBe(
+          `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
+        )
+      }
+    })
+
+    it(`should test getThreeHourForecastByCityId throws without an argument or setLocation`, async () => {
+      try {
+        await openWeather.getThreeHourForecastByGeoCoordinates()
+      } catch (error) {
+        expect(error.message).toBe(
+          `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
         )
       }
     })
