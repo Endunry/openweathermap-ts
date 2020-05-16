@@ -52,4 +52,20 @@ describe(`testing initial state and state getters and setters`, () => {
       countryCode: undefined,
     })
   })
+
+  it(`should use clearLocation correctly`, () => {
+    openWeather.setCityName({
+      cityName: 'Austin',
+      state: 'Tx',
+    })
+    openWeather.clearLocation()
+
+    const location = openWeather.getAllLocations()
+    expect(location).toStrictEqual({
+      city: {},
+      cityId: undefined,
+      geoCoordinates: {},
+      zipcode: {},
+    })
+  })
 })

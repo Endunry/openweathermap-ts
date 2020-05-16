@@ -3,24 +3,54 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-describe(`testing`, () => {
+describe(`Tests Get Methods in app.ts`, () => {
   const openWeather = new OpenWeather({
     apiKey: process.env.API_KEY,
   })
+  
+  describe(`Tests implementation of getByCityName`, () => {
+    it(`should test getCurrentWeatherByCityName throws without an argument or setLocation`, async () => {
+      try {
+        await openWeather.getCurrentWeatherByCityName()
+      } catch (error) {
+        expect(error.message).toBe(
+          'cityName missing, please pass it via argument or set it using setCityName method'
+        )
+      }
+    })
 
-  // test creating an instance without api key
+    //   test creating an instance without api key
+    it(`should test getThreeHourForecastByCityName throws without an argument or setLocation`, async () => {
+      try {
+        await openWeather.getThreeHourForecastByCityName()
+      } catch (error) {
+        expect(error.message).toBe(
+          'cityName missing, please pass it via argument or set it using setCityName method'
+        )
+      }
+    })
+  })
 
-//   it(`tests getCurrentWeatherByCityName`, async () => {
-//     // openWeather.getAllLocations()
-//     expect(openWeather.getCurrentWeatherByCityName).toThrow()
-//   })
+  describe(`Tests implementation of getByCityId`, () => {
+    it(`should test getCurrentWeatherByCityName throws without an argument or setLocation`, async () => {
+      try {
+        await openWeather.getCurrentWeatherByCityName()
+      } catch (error) {
+        expect(error.message).toBe(
+          'cityName missing, please pass it via argument or set it using setCityName method'
+        )
+      }
+    })
 
-  //   it(`getSettings with arguments should return corresponding value`, () => {
-  //     expect(openWeather.getSettings('units')).toBe('imperial')
-  //     expect(openWeather.getSettings('language')).toBe('en')
-  //   })
-
-  //   it(`getSettings with arguments return the settings object if the key is not found`, () => {
-  //     expect(openWeather.getSettings('random')).toBe('random is not found!')
-  //   })
+    //   test creating an instance without api key
+    it(`should test getThreeHourForecastByCityName throws without an argument or setLocation`, async () => {
+      try {
+        await openWeather.getThreeHourForecastByCityName()
+      } catch (error) {
+        expect(error.message).toBe(
+          'cityName missing, please pass it via argument or set it using setCityName method'
+        )
+      }
+    })
+  })
 })

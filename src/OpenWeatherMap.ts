@@ -311,19 +311,4 @@ class OpenWeatherMap {
   }
 }
 
-// tests
-const newMap = new OpenWeatherMap({
-  apiKey: process.env.API_KEY,
-})
-
-// newMap.setCityName({
-//   cityName: 'austin',
-//   countryCode: 'us',
-// })
-
-// console.log(newMap.getAllLocations())
-
 export default OpenWeatherMap
-
-// object shape
-// throw new error

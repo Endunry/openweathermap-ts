@@ -72,7 +72,7 @@ class OpenWeather extends OpenWeatherMap {
     })
   }
 
-  public getThreeHourForecastByCityName(location: GetCurrentWeatherByCityName) {
+  public getThreeHourForecastByCityName(location?: GetCurrentWeatherByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
         const currentWeather = await this.getByCityName({
