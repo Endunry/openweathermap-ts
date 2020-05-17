@@ -8,90 +8,75 @@ describe(`Tests Get Methods in app.ts`, () => {
     apiKey: process.env.API_KEY,
   })
 
-  describe(`Tests implementation of getByCityName`, () => {
-    it(`should test getCurrentWeatherByCityName throws without an argument or setLocation`, async () => {
-      try {
-        await openWeather.getCurrentWeatherByCityName()
-      } catch (error) {
-        expect(error.message).toBe(
+  describe(`getByCityName children methods throw errors without an argument or location object`, () => {
+    test(`getCurrentWeatherByCityName`, () => {
+      openWeather.getCurrentWeatherByCityName().catch(({ message }) => {
+        expect(message).toBe(
           'cityName missing, please pass it via argument or set it using setCityName method'
         )
-      }
+      })
     })
 
-    it(`should test getThreeHourForecastByCityName throws without an argument or setLocation`, async () => {
-      try {
-        await openWeather.getThreeHourForecastByCityName()
-      } catch (error) {
-        expect(error.message).toBe(
+    test(`getThreeHourForecastByCityName`, () => {
+      openWeather.getThreeHourForecastByCityName().catch(({ message }) => {
+        expect(message).toBe(
           'cityName missing, please pass it via argument or set it using setCityName method'
         )
-      }
+      })
     })
   })
 
-  describe(`Tests implementation of getByCityId`, () => {
-    it(`should test getCurrentWeatherByCityId throws without an argument or setLocation`, async () => {
-      try {
-        await openWeather.getCurrentWeatherByCityId()
-      } catch (error) {
-        expect(error.message).toBe(
-          `cityId missing, please pass it via argument or set it using setCityId method`
+  describe(`getByCityId children methods throw errors without an argument or location object`, () => {
+    test(`getCurrentWeatherByCityId`, () => {
+      openWeather.getCurrentWeatherByCityId().catch(({ message }) => {
+        expect(message).toBe(
+          'cityId missing, please pass it via argument or set it using setCityId method'
         )
-      }
+      })
     })
 
-    it(`should test getThreeHourForecastByCityId throws without an argument or setLocation`, async () => {
-      try {
-        await openWeather.getThreeHourForecastByCityId()
-      } catch (error) {
-        expect(error.message).toBe(
-          `cityId missing, please pass it via argument or set it using setCityId method`
+    test(`getCurrentWeatherByCityId`, () => {
+      openWeather.getThreeHourForecastByCityId().catch(({ message }) => {
+        expect(message).toBe(
+          'cityId missing, please pass it via argument or set it using setCityId method'
         )
-      }
+      })
     })
   })
 
-  describe(`Tests implementation of getByGeoCoordinates`, () => {
-    it(`should test getCurrentWeatherByCityId throws without an argument or setLocation`, async () => {
-      try {
-        await openWeather.getCurrentWeatherByGeoCoordinates()
-      } catch (error) {
-        expect(error.message).toBe(
+  describe(`getByGeoCoordinates children methods throw errors without an argument or location object`, () => {
+    test(`getCurrentWeatherByGeoCoordinates`, () => {
+      openWeather.getCurrentWeatherByGeoCoordinates().catch(({ message }) => {
+        expect(message).toBe(
           `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
         )
-      }
+      })
     })
-    it(`should test getCurrentWeatherByGeoCoordinates throws with only one latitude as argument`, async () => {
-      try {
-        await openWeather.getCurrentWeatherByGeoCoordinates(30.2672)
-      } catch (error) {
-        expect(error.message).toBe(
-          `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
-        )
-      }
-    })
-
-    it(`should test getThreeHourForecastByCityId throws without an argument or setLocation`, async () => {
-      try {
-        await openWeather.getThreeHourForecastByGeoCoordinates()
-      } catch (error) {
-        expect(error.message).toBe(
-          `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
-        )
-      }
+    test(`getThreeHourForecastByGeoCoordinates`, () => {
+      openWeather
+        .getThreeHourForecastByGeoCoordinates()
+        .catch(({ message }) => {
+          expect(message).toBe(
+            `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
+          )
+        })
     })
   })
 
-  // describe(`Tests implementation of getByZipcode`, () => {
-  //   it.skip(`should test getCurrentWeatherByZipcode throws without an argument or setLocation`, async () => {
-  //     try {
-  //       await openWeather.getCurrentWeatherByZipcode()
-  //     } catch (error) {
-  //       expect(error.message).toBe(
-  //         `zipcode missing, please pass it via argument or set it using setZipcode method`
-  //       )
-  //     }
-  //   })
-  // })
+  describe(`getByZipcode children methods throw errors without an argument or location object`, () => {
+    test(`getCurrentWeatherByZipcode`, () => {
+      openWeather.getCurrentWeatherByZipcode().catch(({ message }) => {
+        expect(message).toBe(
+          `zipcode missing, please pass it via argument or set it using setZipcode method`
+        )
+      })
+    })
+    test(`getThreeHourForecastByZipcode`, () => {
+      openWeather.getThreeHourForecastByZipcode().catch(({ message }) => {
+        expect(message).toBe(
+          `zipcode missing, please pass it via argument or set it using setZipcode method`
+        )
+      })
+    })
+  })
 })

@@ -63,7 +63,7 @@ class OpenWeatherMap extends OpenWeather {
   }
 
   public async getCurrentWeatherByZipcode(
-    zipcode: number,
+    zipcode?: number,
     countryCode?: CountryCode
   ): Promise<CurrentResponse> {
     return new Promise(async (resolve, reject) => {
@@ -134,7 +134,7 @@ class OpenWeatherMap extends OpenWeather {
   }
 
   public async getThreeHourForecastByZipcode(
-    zipcode: number,
+    zipcode?: number,
     countryCode?: CountryCode
   ): Promise<ThreeHourResponse> {
     return new Promise(async (resolve, reject) => {
@@ -155,34 +155,19 @@ class OpenWeatherMap extends OpenWeather {
 
 const openWeather = new OpenWeatherMap({ apiKey: process.env.API_KEY })
 
-const execute = async () => {
-  // try {
-  //   openWeather.setCityName({
-  //     cityName: 'austin',
-  //   })
-  //   await openWeather.getCurrentWeatherByCityName()
-  // } catch (error) {
-  //   console.log('catch error', error)
-  // }
-  // try {
-  //   openWeather.setCityId(833)
-  //   await openWeather.getCurrentWeatherByCityId()
-  // } catch (error) {
-  //   console.log('catch error', error)
-  // }
+// const execute = async () => {
+//   try {
+//     const data = await openWeather.getThreeHourForecastByGeoCoordinates(
+//       30.2672,
+//       97.7431
+//     )
 
-  try {
-    const data = await openWeather.getThreeHourForecastByGeoCoordinates(
-      30.2672,
-      97.7431
-    )
+//     console.log('data', data)
+//   } catch (error) {
+//     console.log('catch error', error)
+//   }
+// }
 
-    console.log('data', data)
-  } catch (error) {
-    console.log('catch error', error)
-  }
-}
-
-execute()
+// execute()
 
 export default OpenWeatherMap
