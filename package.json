@@ -11,7 +11,11 @@
     "coverage": "jest --coverage"
   },
   "author": "Phillip Shim",
-  "license": "ISC",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node-fetch": "^2.5.7",
+    "node-fetch": "^2.6.0"
+  },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
@@ -24,9 +28,5 @@
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.8.3"
-  },
-  "dependencies": {
-    "@types/node-fetch": "^2.5.7",
-    "node-fetch": "^2.6.0"
   }
 }

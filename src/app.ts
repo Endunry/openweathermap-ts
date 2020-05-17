@@ -153,19 +153,4 @@ const openWeather = new OpenWeatherMap({ apiKey: process.env.API_KEY })
 
 // execute()
 
-// openWeather.setLanguage('aa')
-// openWeather
-//   .getCurrentWeatherByCityName({ cityName: 'austin' })
-//   .then((data) => console.log('data', data))
-// openWeather.getCurrentWeatherByCityId(833)
-// openWeather.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
-// openWeather.getCurrentWeatherByZipcode(78754, 'us')
-// console.log(openWeather.setApiKey('qwpeorqjwe'))
-
-// openWeather.getThreeHourForecastByCityName({ cityName: 'austin' })
-// openWeather.getCurrentWeatherByCityId(833)
-// openWeather.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
-// openWeather.getCurrentWeatherByZipcode(78754, 'us')
-// console.log(openWeather.setApiKey('qwpeorqjwe'))
-
 export default OpenWeatherMap
