@@ -6,9 +6,6 @@ import {
   ThreeHourResponse,
 } from './types'
 import { WEATHER, FORECAST } from './helpers'
-import * as dotenv from 'dotenv'
-
-dotenv.config()
 
 class OpenWeatherMap extends OpenWeather {
   public getCurrentWeatherByCityName(
@@ -152,22 +149,5 @@ class OpenWeatherMap extends OpenWeather {
     })
   }
 }
-
-const openWeather = new OpenWeatherMap({ apiKey: process.env.API_KEY })
-
-// const execute = async () => {
-//   try {
-//     const data = await openWeather.getThreeHourForecastByGeoCoordinates(
-//       30.2672,
-//       97.7431
-//     )
-
-//     console.log('data', data)
-//   } catch (error) {
-//     console.log('catch error', error)
-//   }
-// }
-
-// execute()
 
 export default OpenWeatherMap

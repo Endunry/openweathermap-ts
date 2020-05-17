@@ -140,7 +140,6 @@ class OpenWeather {
   protected getByCityName({ location, queryType }: GetByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
-        // it's possible that argument is missing and set location is missing too
         if (!location?.cityName && !this.location.city.cityName) {
           throw new Error(
             `cityName missing, please pass it via argument or set it using setCityName method`
