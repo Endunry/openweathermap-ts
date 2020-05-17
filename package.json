@@ -1,6 +1,6 @@
 {
   "name": "openweathermap-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An abstract layer over openWeatherMap APIs",
   "main": "dist/app.js",
   "author": "Phillip Shim",
