@@ -53,7 +53,7 @@ describe(`Tests Get Methods in app.ts`, () => {
   })
 
   describe(`Tests implementation of getByGeoCoordinates`, () => {
-    it.skip(`should test getCurrentWeatherByCityId throws without an argument or setLocation`, async () => {
+    it(`should test getCurrentWeatherByCityId throws without an argument or setLocation`, async () => {
       try {
         await openWeather.getCurrentWeatherByGeoCoordinates()
       } catch (error) {
@@ -82,4 +82,16 @@ describe(`Tests Get Methods in app.ts`, () => {
       }
     })
   })
+
+  // describe(`Tests implementation of getByZipcode`, () => {
+  //   it.skip(`should test getCurrentWeatherByZipcode throws without an argument or setLocation`, async () => {
+  //     try {
+  //       await openWeather.getCurrentWeatherByZipcode()
+  //     } catch (error) {
+  //       expect(error.message).toBe(
+  //         `zipcode missing, please pass it via argument or set it using setZipcode method`
+  //       )
+  //     }
+  //   })
+  // })
 })

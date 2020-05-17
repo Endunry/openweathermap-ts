@@ -1,77 +1,27 @@
 // Translation is applied for the city name and description fields.
 import * as dotenv from 'dotenv'
 import fetch from 'node-fetch'
-import { Unit, CountryCode, Language, QueryType } from './types'
+import {
+  Unit,
+  CountryCode,
+  Language,
+  QueryType,
+  InitialSettings,
+  Location,
+  SetCurrentWeatherByCityName,
+  GetByCityName,
+  GetByCityId,
+  GetByGeoCoordinates,
+} from './types'
 import { capitalize } from './helpers'
-
 dotenv.config()
 
-// Todo: Response JSON object types
-// Todo: CityID validations
-// Todo: geoCoordinate types
-// should countryCodes be uppercase? how about states?
-
-interface Settings {
-  units?: Unit
-  language?: string
-  [key: string]: string
-}
-
-interface InitialSettings extends Settings {
-  apiKey: string
-}
-
-interface Location {
-  city: {
-    cityName?: string
-    state?: string
-    countryCode?: CountryCode
-  }
-  cityId?: number
-  geoCoordinates: {
-    latitude?: number
-    longitude?: number
-  }
-  zipcode: {
-    zipcode?: number
-    countryCode?: string
-  }
-}
-
-interface SetCurrentWeatherByCityName {
-  cityName: string
-  // TODO: Update state types
-  state?: string
-  countryCode?: CountryCode
-}
-
-interface IQueryType {
-  queryType: QueryType
-}
-interface GetByCityName extends IQueryType {
-  location?: {
-    cityName?: string
-    // TODO: Update state types
-    state?: string
-    countryCode?: CountryCode
-  }
-}
-
-interface GetByCityId extends IQueryType {
-  cityId?: number
-}
-
-interface GetByGeoCoordinates extends IQueryType {
-  latitude?: number
-  longitude?: number
-}
-
-const host = `https://api.openweathermap.org/data/`
-const apiVersion = `2.5/`
+const HOST = `https://api.openweathermap.org/data/`
+const API_VERSION = `2.5/`
 
 class OpenWeatherMap {
   private settings: InitialSettings
-  private baseURL: string
+  private BASE_URL: string
   private location: Location
 
   constructor({
@@ -90,7 +40,7 @@ class OpenWeatherMap {
       geoCoordinates: {},
       zipcode: {},
     }
-    this.baseURL = host + apiVersion
+    this.BASE_URL = HOST + API_VERSION
   }
 
   // ***
@@ -182,9 +132,9 @@ class OpenWeatherMap {
   // ***
 
   public buildURL(queryType: QueryType, query: string) {
-    const { baseURL, settings } = this
+    const { BASE_URL, settings } = this
 
-    return `${baseURL + queryType}?${query}&appid=${settings.apiKey}`
+    return `${BASE_URL + queryType}?${query}&appid=${settings.apiKey}`
   }
 
   // ***
@@ -216,7 +166,6 @@ class OpenWeatherMap {
         const response = await fetch(request)
         const currentWeather = await response.json()
 
-        console.log(currentWeather)
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -243,7 +192,6 @@ class OpenWeatherMap {
         const response = await fetch(request)
         const currentWeather = await response.json()
 
-        console.log(currentWeather)
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -277,10 +225,8 @@ class OpenWeatherMap {
         const response = await fetch(request)
         const currentWeather = await response.json()
 
-        console.log('success', currentWeather)
         resolve(currentWeather)
       } catch (error) {
-        console.log('error', error)
         reject(error)
       }
     })
@@ -308,9 +254,6 @@ class OpenWeatherMap {
 
         const response = await fetch(request)
         const currentWeather = await response.json()
-
-        console.log('contry code', countryCode)
-        console.log('currentWeather', currentWeather)
 
         resolve(currentWeather)
       } catch (error) {

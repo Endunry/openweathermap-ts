@@ -11,6 +11,6 @@
       "typings/*": ["src/typings/*"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/__tests__/getCurrentWeather.test.ts"],
   "exclude": ["src/test/**/*.spec.ts"]
 }
