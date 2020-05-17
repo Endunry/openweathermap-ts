@@ -3,6 +3,7 @@
   "version": "1.0.3",
   "description": "An abstract layer over openWeatherMap APIs",
   "main": "dist/app.js",
+  "types": "dist/app.d.ts",
   "author": "Phillip Shim",
   "license": "MIT",
   "keywords": [

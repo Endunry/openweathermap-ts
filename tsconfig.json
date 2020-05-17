@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "declaration": true,
     "module": "commonjs",
     "outDir": "dist",
     "sourceMap": false,
@@ -12,5 +13,5 @@
     }
   },
   "include": ["src/**/*.ts", "src/__tests__/getCurrentWeather.test.ts"],
-  "exclude": ["src/test/**/*.spec.ts"]
+  "exclude": ["src/test/**/*.spec.ts"],
 }

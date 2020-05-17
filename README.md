@@ -2,8 +2,8 @@
 
 An abstract layer over openWeatherMap APIs to simplify making calls built with TypeScript and Promises. It's a tiny bundle at 1.2K (gzipped: 580). **Note:** `openweathermap-ts` currently supports the free tier APIs. Future updates will include paid version of APIs.
 
-1. Current Weather
-2. 3-hour Forecast.
+* Current Weather
+* 3-hour Forecast.
 
 ## Installation
 
