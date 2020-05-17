@@ -125,7 +125,7 @@ class OpenWeather {
   // ***
   // ***
 
-  public buildURL(queryType: QueryType, query: string) {
+  private buildURL(queryType: QueryType, query: string) {
     const { BASE_URL, settings } = this
 
     return `${BASE_URL + queryType}?${query}&appid=${settings.apiKey}`

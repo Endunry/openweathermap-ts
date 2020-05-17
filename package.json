@@ -5,6 +5,12 @@
   "main": "dist/app.js",
   "author": "Phillip Shim",
   "license": "MIT",
+  "keywords": [
+    "openweathermap-ts",
+    "open-weather",
+    "weather",
+    "typescript"
+  ],
   "scripts": {
     "build": "rimraf dist && tsc",
     "start": "node dist/app.js",
