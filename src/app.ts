@@ -1,18 +1,25 @@
 import OpenWeather from './OpenWeather'
-import { CountryCode, GetByCityName } from './types'
+import {
+  CountryCode,
+  GetByCityName,
+  CurrentResponse,
+  ThreeHourResponse,
+} from './types'
 import { WEATHER, FORECAST } from './helpers'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
 
 class OpenWeatherMap extends OpenWeather {
-  public getCurrentWeatherByCityName(location?: GetByCityName) {
+  public getCurrentWeatherByCityName(
+    location?: GetByCityName
+  ): Promise<CurrentResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = await this.getByCityName({
+        const currentWeather = (await this.getByCityName({
           location,
           queryType: WEATHER,
-        })
+        })) as CurrentResponse
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -20,10 +27,15 @@ class OpenWeatherMap extends OpenWeather {
     })
   }
 
-  public async getCurrentWeatherByCityId(cityId?: number) {
+  public async getCurrentWeatherByCityId(
+    cityId?: number
+  ): Promise<CurrentResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = this.getByCityId({ cityId, queryType: WEATHER })
+        const currentWeather = (await this.getByCityId({
+          cityId,
+          queryType: WEATHER,
+        })) as CurrentResponse
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -34,14 +46,14 @@ class OpenWeatherMap extends OpenWeather {
   public async getCurrentWeatherByGeoCoordinates(
     latitude?: number,
     longitude?: number
-  ) {
+  ): Promise<CurrentResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = await this.getByGeoCoordinates({
+        const currentWeather = (await this.getByGeoCoordinates({
           latitude,
           longitude,
           queryType: FORECAST,
-        })
+        })) as CurrentResponse
 
         resolve(currentWeather)
       } catch (error) {
@@ -53,10 +65,14 @@ class OpenWeatherMap extends OpenWeather {
   public async getCurrentWeatherByZipcode(
     zipcode: number,
     countryCode?: CountryCode
-  ) {
+  ): Promise<CurrentResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = this.getByZipcode(zipcode, WEATHER, countryCode)
+        const currentWeather = (await this.getByZipcode(
+          zipcode,
+          WEATHER,
+          countryCode
+        )) as CurrentResponse
 
         resolve(currentWeather)
       } catch (error) {
@@ -65,15 +81,16 @@ class OpenWeatherMap extends OpenWeather {
     })
   }
 
-  public getThreeHourForecastByCityName(location?: GetByCityName) {
+  public getThreeHourForecastByCityName(
+    location?: GetByCityName
+  ): Promise<ThreeHourResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = await this.getByCityName({
+        const currentWeather = (await this.getByCityName({
           location,
           queryType: FORECAST,
-        })
+        })) as ThreeHourResponse
 
-        console.log(currentWeather)
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -81,10 +98,15 @@ class OpenWeatherMap extends OpenWeather {
     })
   }
 
-  public getThreeHourForecastByCityId(cityId?: number) {
+  public getThreeHourForecastByCityId(
+    cityId?: number
+  ): Promise<ThreeHourResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = this.getByCityId({ cityId, queryType: FORECAST })
+        const currentWeather = (await this.getByCityId({
+          cityId,
+          queryType: FORECAST,
+        })) as ThreeHourResponse
         resolve(currentWeather)
       } catch (error) {
         reject(error)
@@ -95,14 +117,14 @@ class OpenWeatherMap extends OpenWeather {
   public getThreeHourForecastByGeoCoordinates(
     latitude?: number,
     longitude?: number
-  ) {
+  ): Promise<ThreeHourResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = await this.getByGeoCoordinates({
+        const currentWeather = (await this.getByGeoCoordinates({
           latitude,
           longitude,
           queryType: FORECAST,
-        })
+        })) as ThreeHourResponse
 
         resolve(currentWeather)
       } catch (error) {
@@ -114,12 +136,16 @@ class OpenWeatherMap extends OpenWeather {
   public async getThreeHourForecastByZipcode(
     zipcode: number,
     countryCode?: CountryCode
-  ) {
+  ): Promise<ThreeHourResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const currentWeather = this.getByZipcode(zipcode, FORECAST, countryCode)
+        const currentWeather = (await this.getByZipcode(
+          zipcode,
+          FORECAST,
+          countryCode
+        )) as ThreeHourResponse
 
-        resolve(currentWeather)
+        return resolve(currentWeather)
       } catch (error) {
         reject(error)
       }
@@ -129,28 +155,34 @@ class OpenWeatherMap extends OpenWeather {
 
 const openWeather = new OpenWeatherMap({ apiKey: process.env.API_KEY })
 
-// const execute = async () => {
-//   // try {
-//   //   openWeather.setCityName({
-//   //     cityName: 'austin',
-//   //   })
-//   //   await openWeather.getCurrentWeatherByCityName()
-//   // } catch (error) {
-//   //   console.log('catch error', error)
-//   // }
-//   // try {
-//   //   openWeather.setCityId(833)
-//   //   await openWeather.getCurrentWeatherByCityId()
-//   // } catch (error) {
-//   //   console.log('catch error', error)
-//   // }
-//   try {
-//     await openWeather.getCurrentWeatherByGeoCoordinates(30.2672, 97.7431)
-//   } catch (error) {
-//     console.log('catch error', error)
-//   }
-// }
+const execute = async () => {
+  // try {
+  //   openWeather.setCityName({
+  //     cityName: 'austin',
+  //   })
+  //   await openWeather.getCurrentWeatherByCityName()
+  // } catch (error) {
+  //   console.log('catch error', error)
+  // }
+  // try {
+  //   openWeather.setCityId(833)
+  //   await openWeather.getCurrentWeatherByCityId()
+  // } catch (error) {
+  //   console.log('catch error', error)
+  // }
 
-// execute()
+  try {
+    const data = await openWeather.getThreeHourForecastByGeoCoordinates(
+      30.2672,
+      97.7431
+    )
+
+    console.log('data', data)
+  } catch (error) {
+    console.log('catch error', error)
+  }
+}
+
+execute()
 
 export default OpenWeatherMap
