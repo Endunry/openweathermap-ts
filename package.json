@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "An abstract layer over openWeatherMap APIs",
   "main": "dist/app.js",
+  "author": "Phillip Shim",
+  "license": "MIT",
   "scripts": {
     "build": "rimraf dist && tsc",
     "start": "node dist/app.js",
@@ -11,11 +13,10 @@
     "test:watch": "jest --watch",
     "coverage": "jest --coverage"
   },
-  "author": "Phillip Shim",
-  "license": "MIT",
   "dependencies": {
     "@types/node-fetch": "^2.5.7",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "np": "^6.2.3"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
