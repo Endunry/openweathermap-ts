@@ -1,20 +1,9 @@
 import OpenWeatherMap from './OpenWeatherMap'
-import { Unit, CountryCode, Language, QueryType } from './types'
+import { CountryCode, GetByCityName } from './types'
+import { WEATHER, FORECAST } from './helpers'
+import * as dotenv from 'dotenv'
 
-const WEATHER = 'weather'
-const FORECAST = 'forecast'
-
-interface GetByCityName {
-  cityName?: string
-  // TODO: Update state types
-  state?: string
-  countryCode?: CountryCode
-}
-
-interface GetByGeoCoordinates {
-  latitude?: number
-  longitude?: number
-}
+dotenv.config()
 
 class OpenWeather extends OpenWeatherMap {
   public getCurrentWeatherByCityName(location?: GetByCityName) {

@@ -1,5 +1,3 @@
-// Translation is applied for the city name and description fields.
-import * as dotenv from 'dotenv'
 import fetch from 'node-fetch'
 import {
   Unit,
@@ -13,11 +11,7 @@ import {
   GetByCityId,
   GetByGeoCoordinates,
 } from './types'
-import { capitalize } from './helpers'
-dotenv.config()
-
-const HOST = `https://api.openweathermap.org/data/`
-const API_VERSION = `2.5/`
+import { HOST, API_VERSION } from './helpers'
 
 class OpenWeatherMap {
   private settings: InitialSettings
