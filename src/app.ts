@@ -1,11 +1,11 @@
-import OpenWeatherMap from './OpenWeatherMap'
+import OpenWeather from './OpenWeather'
 import { CountryCode, GetByCityName } from './types'
 import { WEATHER, FORECAST } from './helpers'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-class OpenWeather extends OpenWeatherMap {
+class OpenWeatherMap extends OpenWeather {
   public getCurrentWeatherByCityName(location?: GetByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -127,7 +127,7 @@ class OpenWeather extends OpenWeatherMap {
   }
 }
 
-const openWeather = new OpenWeather({ apiKey: process.env.API_KEY })
+const openWeather = new OpenWeatherMap({ apiKey: process.env.API_KEY })
 
 // const execute = async () => {
 //   // try {
@@ -168,4 +168,4 @@ const openWeather = new OpenWeather({ apiKey: process.env.API_KEY })
 // openWeather.getCurrentWeatherByZipcode(78754, 'us')
 // console.log(openWeather.setApiKey('qwpeorqjwe'))
 
-export default OpenWeather
+export default OpenWeatherMap

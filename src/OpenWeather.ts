@@ -13,7 +13,7 @@ import {
 } from './types'
 import { HOST, API_VERSION } from './helpers'
 
-class OpenWeatherMap {
+class OpenWeather {
   private settings: InitialSettings
   private BASE_URL: string
   private location: Location
@@ -257,4 +257,4 @@ class OpenWeatherMap {
   }
 }
 
-export default OpenWeatherMap
+export default OpenWeather

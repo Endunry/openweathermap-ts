@@ -1,7 +1,7 @@
 {
-  "name": "node-with-ts",
+  "name": "open-weather-map",
   "version": "1.0.0",
-  "description": "",
+  "description": "An abstract layer over openWeatherMap APIs",
   "main": "dist/app.js",
   "scripts": {
     "build": "rimraf dist && tsc",
