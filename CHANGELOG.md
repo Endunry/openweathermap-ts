@@ -1,3 +1,7 @@
+#### 1.2.0 (2020-05-18)
+
+- Minor patch to update README.md and do cleanups
+
 #### 1.1.7 (2020-05-18)
 
 - Add more badges
