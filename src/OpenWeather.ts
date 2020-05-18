@@ -234,7 +234,7 @@ class OpenWeather {
       try {
         const { location } = this
 
-        if (!zipcode || !location.zipcode.zipcode) {
+        if (!zipcode && !location.zipcode.zipcode) {
           throw new Error(
             `zipcode missing, please pass it via argument or set it using setZipcode method`
           )

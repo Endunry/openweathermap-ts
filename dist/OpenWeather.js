@@ -247,7 +247,7 @@ var OpenWeather = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
                         location_2 = this.location;
-                        if (!zipcode || !location_2.zipcode.zipcode) {
+                        if (!zipcode && !location_2.zipcode.zipcode) {
                             throw new Error("zipcode missing, please pass it via argument or set it using setZipcode method");
                         }
                         zipcode = zipcode || location_2.zipcode.zipcode;
