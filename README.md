@@ -53,9 +53,7 @@ Notice that methods are grouped together by &. That means the grouped methods wo
 
 > We recommend to call API by city ID to get unambiguous result for your city.
 
-You can download a List of CityIds in JSON in the [project Repo](https://github.com/shimphillip/openweathermap-ts/blob/master/city.list.json)
-
-Alternatively, you can also download them at [http://bulk.openweathermap.org/sample/](http://bulk.openweathermap.org/sample/)
+You can also download them at [http://bulk.openweathermap.org/sample/](http://bulk.openweathermap.org/sample/)
 
 The methods expect a cityId
 
@@ -236,7 +234,7 @@ openWeather.getAllLocations()
 
 ## Bug Reports
 
-Please create issues or pull requests at https://github.com/shimphillip/open-weather-map
+Please create issues or pull requests at https://github.com/shimphillip/openweathermap-ts
 
 ## Future Works 🚀
 
