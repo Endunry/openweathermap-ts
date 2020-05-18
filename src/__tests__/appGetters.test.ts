@@ -19,7 +19,6 @@ describe('Tests Get Methods in app.ts', () => {
       openWeather
         .getCurrentWeatherByCityName({
           state: 'Texas',
-          countryCode: 'us'
         })
         .catch(({ message }) => {
           expect(message).toBe(

@@ -151,13 +151,3 @@ class OpenWeatherMap extends OpenWeather {
 }
 
 export default OpenWeatherMap;
-
-const openWeather = new OpenWeatherMap({
-  apiKey: 'e2fd80dfa57a0834f2adcd83bf416fa3'
-});
-
-openWeather
-  .getCurrentWeatherByCityName({
-    cityName: 'Austin'
-  })
-  .then((data) => console.log(data.visibility));

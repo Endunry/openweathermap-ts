@@ -270,11 +270,3 @@ var OpenWeatherMap = /** @class */ (function (_super) {
     return OpenWeatherMap;
 }(OpenWeather_1.default));
 exports.default = OpenWeatherMap;
-var openWeather = new OpenWeatherMap({
-    apiKey: 'e2fd80dfa57a0834f2adcd83bf416fa3'
-});
-openWeather
-    .getCurrentWeatherByCityName({
-    cityName: 'Austin'
-})
-    .then(function (data) { return console.log(data.visibility); });
