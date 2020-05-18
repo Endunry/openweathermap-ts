@@ -4,15 +4,15 @@
 const data = {
   coord: {
     lon: -0.13,
-    lat: 51.51,
+    lat: 51.51
   },
   weather: [
     {
       id: 300,
       main: 'Drizzle',
       description: 'light intensity drizzle',
-      icon: '09d',
-    },
+      icon: '09d'
+    }
   ],
   base: 'stations',
   main: {
@@ -20,15 +20,14 @@ const data = {
     pressure: 1012,
     humidity: 81,
     temp_min: 279.15,
-    temp_max: 281.15,
+    temp_max: 281.15
   },
-  visibility: 10000,
   wind: {
     speed: 4.1,
-    deg: 80,
+    deg: 80
   },
   clouds: {
-    all: 90,
+    all: 90
   },
   dt: 1485789600,
   sys: {
@@ -37,11 +36,15 @@ const data = {
     message: 0.0103,
     country: 'GB',
     sunrise: 1485762037,
-    sunset: 1485794875,
+    sunset: 1485794875
   },
   id: 2643743,
   name: 'London',
-  cod: 200,
-}
+  cod: 200
+};
 
-export type CurrentResponse = typeof data
+type Visibility = {
+  visibility?: number;
+};
+
+export type CurrentResponse = typeof data & Visibility;

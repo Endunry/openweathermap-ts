@@ -26,29 +26,25 @@ const OpenWeatherMap = require('openweathermap-ts');
 // or
 import OpenWeatherMap from 'openweathermap-ts';
 
-/**
- * @param {
- *  apiKey: string,
- *  units?: 'metric | imperial | standard'
- *  language?: LanguageTypes
- * }
- */
 const openWeather = new OpenWeatherMap({
   apiKey: 'Your API Key'
 });
 ```
 
-List of [LanguageTypes](https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md)
-
 ## Usage
 
-There are 2 ways of using public getter methods. You can pass in argument/s or configure a location object and let the methods automatically reuse defined location. When both are used, the argument/s precede over defined location object.
+There are 2 ways of using public getter methods.
 
-Notice some methods are grouped together by &. Their arguments are the same.
+1. You can pass in argument/s
+2. Store preferences in the [location object](#Helpers-for-location-object)
+
+When both are used, the argument/s precede over defined location object.
+
+Notice some methods are grouped together by & because their arguments are the same put output different results.
 
 ---
 
-### getCurrentWeatherByCityName & getThreeHourForecastByCityName
+## getCurrentWeatherByCityName & getThreeHourForecastByCityName
 
 ```js
 /**
@@ -69,7 +65,7 @@ try {
   const weather = await openWeather.getThreeHourForecastByCityName({
     cityName: 'Cedar Park',
     state: 'Texas',
-    countryCode: 'us'
+    countryCode: 'US'
   });
   console.log('Weather object is', weather);
 } catch (error) {
@@ -79,7 +75,7 @@ try {
 
 List of [CountryCodeType](https://github.com/shimphillip/openweathermap-ts/blob/master/src/helpers/country-codes.ts)
 
-### getCurrentWeatherByCityId & getThreeHourForecastByCityId
+## getCurrentWeatherByCityId & getThreeHourForecastByCityId
 
 ```js
 /**
@@ -110,25 +106,23 @@ openWeather
 
 List of [CityIds](http://bulk.openweathermap.org/sample/)
 
-### getCurrentWeatherByGeoCoordinates & getThreeHourForecastByGeoCoordinates
+## getCurrentWeatherByGeoCoordinates & getThreeHourForecastByGeoCoordinates
 
 ```js
 /**
  * @params latitude: number, longitude: number
  */
-
 openWeather
   .getCurrentWeatherByGeoCoordinates(33.426971, -117.611992)
   .then((weather) => console.log('Weather object is', weather));
 ```
 
-### getCurrentWeatherByZipcode & getThreeHourForecastByZipcode
+## getCurrentWeatherByZipcode & getThreeHourForecastByZipcode
 
 ```js
 /**
  * @params zipcode: number, countryCode?: CountryCodeType
  */
-
 openWeather
   .getCurrentWeatherByZipcode(84604)
   .then((data) => console.log('Weather object is', data));
@@ -138,7 +132,7 @@ Or
 
 ```js
 openWeather
-  .getCurrentWeatherByZipcode(84604, 'us')
+  .getCurrentWeatherByZipcode(84604, 'US')
   .then((data) => console.log('Weather object is', data));
 ```
 
@@ -146,9 +140,11 @@ List of [CountryCodeType](https://github.com/shimphillip/openweathermap-ts/blob/
 
 ---
 
-### _Helper Methods_
+&nbsp;
 
-Helpers for `settings` object
+## Config Methods
+
+### Helpers for settings object
 
 ```js
 /**
@@ -162,9 +158,10 @@ openWeather.setApiKey('Your changed API key');
 openWeather.setUnits('metric');
 
 /**
- * @param apiKey: string
+ * @param language: LanguageTypes
  */
-openWeather.setLanguage('kr'); // https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md
+openWeather.setLanguage('kr');
+// LanguageTypes List -> https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md
 
 /**
  * @param none
@@ -177,7 +174,9 @@ openWeather.getAllSettings();
 openWeather.clearSettings(); // Remember to reset your API Key
 ```
 
-Helpers for `location` object
+&nbsp;
+
+### Helpers for location object
 
 ```js
 /**
@@ -189,12 +188,13 @@ openWeather.setCityId(1835848);
  * @param {
  *  cityName: string,
  *  state?: string, // (optional) Spell it out. E.g, Texas
- *  countryCode?: string // (optional)
+ *  countryCode?: CountryCodeTypes // (optional) 
  * }
  */
 openWeather.setCityName({
   cityName: 'Austin'
 });
+// List of CountryCodeType https://github.com/shimphillip/openweathermap-ts/blob/master/src/helpers/country-codes.ts
 
 /**
  * @params latitude: number, longitude: number
@@ -202,9 +202,10 @@ openWeather.setCityName({
 openWeather.setGeoCoordinates(33.426971, -117.611992);
 
 /**
- * @params zipcode: number, countryCode?: string (optional)
+ * @params zipcode: number, countryCodeTypes?: string (optional)
  */
-openWeather.setZipCode(84604, 'us');
+openWeather.setZipCode(84604, 'US');
+// List of CountryCodeType https://github.com/shimphillip/openweathermap-ts/blob/master/src/helpers/country-codes.ts
 
 /**
  * @param none
@@ -217,6 +218,8 @@ openWeather.getAllLocations();
 openWeather.clearLocation();
 ```
 
+&nbsp;
+
 ## Bug Reports
 
 Please create issues or pull requests at [https://github.com/shimphillip/openweathermap-ts](https://github.com/shimphillip/openweathermap-ts)
@@ -226,6 +229,7 @@ Please create issues or pull requests at [https://github.com/shimphillip/openwea
 - CityID validations
 - Filter out unsolicited information options
 - Handle coordinate types
+- Supports other formats like XML
 - Enforce strict rules on countryCodes and states
 - support for paid services like Daily Forecast and Hourly Forecast
 

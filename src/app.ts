@@ -1,11 +1,11 @@
-import OpenWeather from './OpenWeather'
+import OpenWeather from './OpenWeather';
 import {
   CountryCode,
   GetByCityNameChild,
   CurrentResponse,
-  ThreeHourResponse,
-} from './types'
-import { WEATHER, FORECAST } from './helpers'
+  ThreeHourResponse
+} from './types';
+import { WEATHER, FORECAST } from './helpers';
 
 class OpenWeatherMap extends OpenWeather {
   public getCurrentWeatherByCityName(
@@ -15,13 +15,13 @@ class OpenWeatherMap extends OpenWeather {
       try {
         const currentWeather = (await this.getByCityName({
           location,
-          queryType: WEATHER,
-        })) as CurrentResponse
-        resolve(currentWeather)
+          queryType: WEATHER
+        })) as CurrentResponse;
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public async getCurrentWeatherByCityId(
@@ -31,13 +31,13 @@ class OpenWeatherMap extends OpenWeather {
       try {
         const currentWeather = (await this.getByCityId({
           cityId,
-          queryType: WEATHER,
-        })) as CurrentResponse
-        resolve(currentWeather)
+          queryType: WEATHER
+        })) as CurrentResponse;
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public async getCurrentWeatherByGeoCoordinates(
@@ -49,14 +49,14 @@ class OpenWeatherMap extends OpenWeather {
         const currentWeather = (await this.getByGeoCoordinates({
           latitude,
           longitude,
-          queryType: FORECAST,
-        })) as CurrentResponse
+          queryType: FORECAST
+        })) as CurrentResponse;
 
-        resolve(currentWeather)
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public async getCurrentWeatherByZipcode(
@@ -69,13 +69,13 @@ class OpenWeatherMap extends OpenWeather {
           zipcode,
           WEATHER,
           countryCode
-        )) as CurrentResponse
+        )) as CurrentResponse;
 
-        resolve(currentWeather)
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public getThreeHourForecastByCityName(
@@ -85,14 +85,14 @@ class OpenWeatherMap extends OpenWeather {
       try {
         const currentWeather = (await this.getByCityName({
           location,
-          queryType: FORECAST,
-        })) as ThreeHourResponse
+          queryType: FORECAST
+        })) as ThreeHourResponse;
 
-        resolve(currentWeather)
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public getThreeHourForecastByCityId(
@@ -102,13 +102,13 @@ class OpenWeatherMap extends OpenWeather {
       try {
         const currentWeather = (await this.getByCityId({
           cityId,
-          queryType: FORECAST,
-        })) as ThreeHourResponse
-        resolve(currentWeather)
+          queryType: FORECAST
+        })) as ThreeHourResponse;
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public getThreeHourForecastByGeoCoordinates(
@@ -120,14 +120,14 @@ class OpenWeatherMap extends OpenWeather {
         const currentWeather = (await this.getByGeoCoordinates({
           latitude,
           longitude,
-          queryType: FORECAST,
-        })) as ThreeHourResponse
+          queryType: FORECAST
+        })) as ThreeHourResponse;
 
-        resolve(currentWeather)
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public async getThreeHourForecastByZipcode(
@@ -140,14 +140,24 @@ class OpenWeatherMap extends OpenWeather {
           zipcode,
           FORECAST,
           countryCode
-        )) as ThreeHourResponse
+        )) as ThreeHourResponse;
 
-        return resolve(currentWeather)
+        return resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 }
 
-export default OpenWeatherMap
+export default OpenWeatherMap;
+
+const openWeather = new OpenWeatherMap({
+  apiKey: 'e2fd80dfa57a0834f2adcd83bf416fa3'
+});
+
+openWeather
+  .getCurrentWeatherByCityName({
+    cityName: 'Austin'
+  })
+  .then((data) => console.log(data.visibility));

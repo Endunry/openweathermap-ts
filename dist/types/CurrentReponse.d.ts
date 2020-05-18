@@ -17,7 +17,6 @@ declare const data: {
         temp_min: number;
         temp_max: number;
     };
-    visibility: number;
     wind: {
         speed: number;
         deg: number;
@@ -38,5 +37,8 @@ declare const data: {
     name: string;
     cod: number;
 };
-export declare type CurrentResponse = typeof data;
+declare type Visibility = {
+    visibility?: number;
+};
+export declare type CurrentResponse = typeof data & Visibility;
 export {};

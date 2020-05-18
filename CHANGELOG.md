@@ -1,3 +1,7 @@
+#### 1.2.1 (2020-05-18)
+
+- Update country codes and README.md
+
 #### 1.2.0 (2020-05-18)
 
 - Minor patch to update README.md and do cleanups

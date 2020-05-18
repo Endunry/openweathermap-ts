@@ -66,7 +66,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.getByCityName({
                                 location: location,
-                                queryType: helpers_1.WEATHER,
+                                queryType: helpers_1.WEATHER
                             })];
                     case 1:
                         currentWeather = (_a.sent());
@@ -93,7 +93,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                                     _a.trys.push([0, 2, , 3]);
                                     return [4 /*yield*/, this.getByCityId({
                                             cityId: cityId,
-                                            queryType: helpers_1.WEATHER,
+                                            queryType: helpers_1.WEATHER
                                         })];
                                 case 1:
                                     currentWeather = (_a.sent());
@@ -123,7 +123,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                                     return [4 /*yield*/, this.getByGeoCoordinates({
                                             latitude: latitude,
                                             longitude: longitude,
-                                            queryType: helpers_1.FORECAST,
+                                            queryType: helpers_1.FORECAST
                                         })];
                                 case 1:
                                     currentWeather = (_a.sent());
@@ -176,7 +176,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.getByCityName({
                                 location: location,
-                                queryType: helpers_1.FORECAST,
+                                queryType: helpers_1.FORECAST
                             })];
                     case 1:
                         currentWeather = (_a.sent());
@@ -201,7 +201,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.getByCityId({
                                 cityId: cityId,
-                                queryType: helpers_1.FORECAST,
+                                queryType: helpers_1.FORECAST
                             })];
                     case 1:
                         currentWeather = (_a.sent());
@@ -227,7 +227,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.getByGeoCoordinates({
                                 latitude: latitude,
                                 longitude: longitude,
-                                queryType: helpers_1.FORECAST,
+                                queryType: helpers_1.FORECAST
                             })];
                     case 1:
                         currentWeather = (_a.sent());
@@ -270,3 +270,11 @@ var OpenWeatherMap = /** @class */ (function (_super) {
     return OpenWeatherMap;
 }(OpenWeather_1.default));
 exports.default = OpenWeatherMap;
+var openWeather = new OpenWeatherMap({
+    apiKey: 'e2fd80dfa57a0834f2adcd83bf416fa3'
+});
+openWeather
+    .getCurrentWeatherByCityName({
+    cityName: 'Austin'
+})
+    .then(function (data) { return console.log(data.visibility); });
