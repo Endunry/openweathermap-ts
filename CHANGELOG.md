@@ -1,3 +1,7 @@
+#### 1.1.5 (2020-05-18)
+
+- Add .travis.yml
+
 #### 1.1.4 (2020-05-18)
 
 - Add .npmignore to improve quality score of the npm package
