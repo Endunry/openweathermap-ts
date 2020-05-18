@@ -21,7 +21,7 @@ export interface GetByGeoCoordinates extends IQueryType {
     latitude?: number;
     longitude?: number;
 }
-export interface GetByCityName {
+export interface GetByCityNameChild {
     cityName?: string;
     state?: string;
     countryCode?: CountryCode;
