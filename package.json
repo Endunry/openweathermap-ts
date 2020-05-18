@@ -1,6 +1,6 @@
 {
   "name": "openweathermap-ts",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "An abstract layer over openWeatherMap APIs",
   "main": "dist/app.js",
   "types": "dist/app.d.ts",
@@ -21,6 +21,7 @@
     "dev": "nodemon --exec ts-node src/app.ts --watch src",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {

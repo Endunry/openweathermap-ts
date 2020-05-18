@@ -1,3 +1,8 @@
+#### 1.1.7 (2020-05-18)
+
+- Add more badges
+- More thorough test coverage
+
 #### 1.1.5 (2020-05-18)
 
 - Add .travis.yml

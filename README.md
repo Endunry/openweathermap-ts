@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/shimphillip/openweathermap-ts.svg?branch=master)](https://travis-ci.org/shimphillip/openweathermap-ts)
 [![Coverage Status](https://coveralls.io/repos/github/shimphillip/openweathermap-ts/badge.svg?branch=master)](https://coveralls.io/github/shimphillip/openweathermap-ts?branch=master)
+[![npm version](https://badge.fury.io/js/openweathermap-ts.svg)](https://badge.fury.io/js/openweathermap-ts)
+[![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/shimphillip)
 
 # openweathermap-ts
 
