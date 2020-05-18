@@ -133,11 +133,11 @@ class OpenWeather {
 
   // ***
   // ***
-  // protected
+  // Parent Getters
   // ***
   // ***
 
-  protected getByCityName({ location, queryType }: GetByCityName) {
+  public getByCityName({ location, queryType }: GetByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
         if (!location?.cityName && !this.location.city.cityName) {
@@ -166,7 +166,7 @@ class OpenWeather {
     })
   }
 
-  protected getByCityId({ cityId, queryType }: GetByCityId) {
+  public getByCityId({ cityId, queryType }: GetByCityId) {
     return new Promise(async (resolve, reject) => {
       try {
         const { location } = this
@@ -192,7 +192,7 @@ class OpenWeather {
     })
   }
 
-  protected getByGeoCoordinates({
+  public getByGeoCoordinates({
     latitude,
     longitude,
     queryType,
@@ -225,7 +225,7 @@ class OpenWeather {
     })
   }
 
-  protected getByZipcode(
+  public getByZipcode(
     zipcode: number,
     queryType: QueryType,
     countryCode?: CountryCode

@@ -10,4 +10,3 @@ node_js:
   - '14'
 
 sudo: false
-after_success: yarn coverage

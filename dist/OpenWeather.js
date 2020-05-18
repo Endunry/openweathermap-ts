@@ -133,7 +133,7 @@ var OpenWeather = /** @class */ (function () {
     };
     // ***
     // ***
-    // protected
+    // Parent Getters
     // ***
     // ***
     OpenWeather.prototype.getByCityName = function (_a) {

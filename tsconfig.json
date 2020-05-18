@@ -12,6 +12,6 @@
       "typings/*": ["src/typings/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/__tests__/getters.test.ts"],
+  "include": ["src/**/*.ts", "src/__tests__/appGetters.test.ts"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }

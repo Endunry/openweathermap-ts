@@ -16,9 +16,9 @@ declare class OpenWeather {
     getAllSettings(): InitialSettings;
     getAllLocations(): Location;
     private buildURL;
-    protected getByCityName({ location, queryType }: GetByCityName): Promise<unknown>;
-    protected getByCityId({ cityId, queryType }: GetByCityId): Promise<unknown>;
-    protected getByGeoCoordinates({ latitude, longitude, queryType, }: GetByGeoCoordinates): Promise<unknown>;
-    protected getByZipcode(zipcode: number, queryType: QueryType, countryCode?: CountryCode): Promise<unknown>;
+    getByCityName({ location, queryType }: GetByCityName): Promise<unknown>;
+    getByCityId({ cityId, queryType }: GetByCityId): Promise<unknown>;
+    getByGeoCoordinates({ latitude, longitude, queryType, }: GetByGeoCoordinates): Promise<unknown>;
+    getByZipcode(zipcode: number, queryType: QueryType, countryCode?: CountryCode): Promise<unknown>;
 }
 export default OpenWeather;
