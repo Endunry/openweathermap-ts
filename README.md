@@ -34,7 +34,7 @@ const openWeather = new OpenWeatherMap({
 // or pass additional options in. You can change these later
 const openWeather = new OpenWeatherMap({
   apiKey: 'Your API Key',
-  units: 'metric', // options-> imperial || metric || standard
+  units: 'metric', // imperial | metric | standard
   language: 'kr',
 })
 ```
@@ -203,3 +203,9 @@ Please create issues or pull requests at https://github.com/shimphillip/openweat
 - Handle coordinate types
 - Enforce strict rules on countryCodes and states
 - support for paid services like Daily Forecast and Hourly Forecast
+
+--- 
+
+Love what you use? Buy me a ~~coffee~~ boba!🍹
+
+<a href="https://www.buymeacoffee.com/shimphillip" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
