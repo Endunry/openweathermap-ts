@@ -1,6 +1,6 @@
 # openweathermap-ts
 
-An abstract layer over openWeatherMap APIs to simplify making calls built with TypeScript and Promises 🎉. It's a tiny bundle at 1.2K (gzipped: 580). **Note:** `openweathermap-ts` currently supports free tier API services:
+An abstract layer over openWeatherMap APIs to simplify making calls built with TypeScript and Promises 🎉. **Note:** `openweathermap-ts` currently supports free tier API services:
 
 - Current Weather
 - 3-hour Forecast. (5 day / 3 hour)
@@ -53,7 +53,7 @@ Notice that methods are grouped together by &. That means the grouped methods wo
 
 > We recommend to call API by city ID to get unambiguous result for your city.
 
-You can also download them at [http://bulk.openweathermap.org/sample/](http://bulk.openweathermap.org/sample/)
+You can download a list of [city Ids](http://bulk.openweathermap.org/sample/)
 
 The methods expect a cityId
 
@@ -132,103 +132,63 @@ openWeather
 
 ### _Helper Methods_
 
-### setApiKey
-
 ```js
+// setApiKey
 openWeather.setApiKey('Your changed API key')
-```
 
-### setUnits
-
-Takes 1 of 3 types.
-
-```js
+// setUnits
 // 'imperial' (Fahrenheit) | 'metric' (Celsius) | 'standard' (Kelvin)
 openWeather.setUnits('metric')
-```
 
-### setLanguage
+// setLanguage
+// Translation is applied for the city name and description fields.
+// Find them here: https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md
 
-Translation is applied for the city name and description fields.
-
-[List of avaliable languages](https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md)
-
-```js
 openWeather.setUnits('kr')
-```
 
-### clearSettings
+// clearSettings
+// The above three properties are stored in `settings` object. You can clean out all the properties
+// Note: this also wipes out your API Key_
 
-The above three properties are stored in `settings` object. You can clean out all the properties
-
-_Note: this also wipes out your API Key_
-
-```js
 openWeather.clearSettings()
-```
 
-### setCityId
-
-```js
+// setCityId
 openWeather.setCityId(1835848)
-```
 
-### setCityName
+// setCityName
+//state and countryCode are optional
 
-state and countryCode are optional
-
-```js
 openWeather.setCityName({
   cityName: 'Austin',
 })
-```
 
-```js
+// or
+
 openWeather.setCityName({
   cityName: 'Austin',
   state: 'Texas',
 })
-```
 
-### setGeoCoordinates
-
-```js
+// setGeoCoordinates
 openWeather.setGeoCoordinates(33.426971, -117.611992)
-```
 
-### setZipCode
-
-2nd argument Country Code is optional
-
-```js
+// setZipCode
+// 2nd argument Country Code is optional
 openWeather.setZipCode(84604)
-```
 
-```js
+// or
 openWeather.setZipCode(84604, 'us')
-```
 
-### clearLocation
-
-The above location setter methods belong to the `location` object. Invoking clearLocation sets the object back to default.
-
-```js
+// clearLocation
+// The above location setter methods belong to the `location` object. Invoking clearLocation sets the object back to default.
 openWeather.clearLocation()
-```
 
-### getAllSettings
-
-You can view what you stored inside your `settings` object
-
-```js
+// getAllSettings
+// You can view what you stored inside your `settings` object
 openWeather.getAllSettings()
-```
 
-### getAllLocations
-
-You can view what you stored inside your `location` object
-
-```js
+// getAllLocations
+// You can view what you stored inside your `location` object
 openWeather.getAllLocations()
 ```
 
