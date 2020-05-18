@@ -1,7 +1,7 @@
 import OpenWeather from './OpenWeather'
 import {
   CountryCode,
-  GetByCityName,
+  GetByCityNameChild,
   CurrentResponse,
   ThreeHourResponse,
 } from './types'
@@ -9,7 +9,7 @@ import { WEATHER, FORECAST } from './helpers'
 
 class OpenWeatherMap extends OpenWeather {
   public getCurrentWeatherByCityName(
-    location?: GetByCityName
+    location?: GetByCityNameChild
   ): Promise<CurrentResponse> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -79,7 +79,7 @@ class OpenWeatherMap extends OpenWeather {
   }
 
   public getThreeHourForecastByCityName(
-    location?: GetByCityName
+    location?: GetByCityNameChild
   ): Promise<ThreeHourResponse> {
     return new Promise(async (resolve, reject) => {
       try {

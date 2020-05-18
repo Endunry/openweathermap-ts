@@ -1,5 +1,9 @@
 import { CountryCode, QueryType } from './index'
 
+//
+// Parent Methods
+//
+
 export interface SetCurrentWeatherByCityName {
   cityName: string
   state?: string
@@ -26,7 +30,10 @@ export interface GetByGeoCoordinates extends IQueryType {
   longitude?: number
 }
 
-export interface GetByCityName {
+//
+// children methods
+//
+export interface GetByCityNameChild {
   cityName?: string
   state?: string
   countryCode?: CountryCode
