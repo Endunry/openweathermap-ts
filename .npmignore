@@ -1,3 +1,4 @@
 .env
 yarn-error.log
 .prettierrc
+coverage/

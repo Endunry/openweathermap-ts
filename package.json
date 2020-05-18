@@ -21,7 +21,7 @@
     "dev": "nodemon --exec ts-node src/app.ts --watch src",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "node-fetch": "^2.6.0"
@@ -30,6 +30,7 @@
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
     "@types/node-fetch": "^2.5.7",
+    "coveralls": "^3.1.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "nodemon": "^2.0.3",

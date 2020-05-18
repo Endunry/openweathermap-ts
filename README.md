@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/shimphillip/openweathermap-ts.svg?branch=master)](https://travis-ci.org/shimphillip/openweathermap-ts)
+[![Coverage Status](https://coveralls.io/repos/github/shimphillip/openweathermap-ts/badge.svg?branch=master)](https://coveralls.io/github/shimphillip/openweathermap-ts?branch=master)
+
 # openweathermap-ts
 
 An abstract layer over openWeatherMap APIs to simplify making calls built with TypeScript and Promises 🎉. **Note:** `openweathermap-ts` currently supports free tier API services:
