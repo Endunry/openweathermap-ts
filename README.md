@@ -2,8 +2,8 @@
 
 An abstract layer over openWeatherMap APIs to simplify making calls built with TypeScript and Promises 🎉. It's a tiny bundle at 1.2K (gzipped: 580). **Note:** `openweathermap-ts` currently supports free tier API services:
 
-- Weather
-- 3-hour Forecast.
+- Current Weather
+- 3-hour Forecast. (5 day / 3 hour)
 
 ## Installation
 
@@ -22,7 +22,7 @@ yarn add openweathermap-ts
 ```js
 // require the module (commonJS)
 const OpenWeatherMap = require('openweathermap-ts')
-// or import the module (ESM)
+// or import the module (ESM) if your app supports it
 import OpenWeatherMap from 'openweathermap-ts'
 
 // Make an instance with your API key
@@ -30,14 +30,16 @@ const openWeather = new OpenWeatherMap({
   apiKey: 'Your API Key',
 })
 
+// default units and language: 'imperial' and 'en'
 // or pass additional options in. You can change these later
-// defaults: units: 'imperial' and language: 'en'
 const openWeather = new OpenWeatherMap({
   apiKey: 'Your API Key',
-  units: 'metric',
+  units: 'metric', // options-> imperial || metric || standard
   language: 'kr',
 })
 ```
+
+[List of avaliable languages](https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md)
 
 ## Usage
 
@@ -51,7 +53,7 @@ Notice that methods are grouped together by &. That means the grouped methods wo
 
 > We recommend to call API by city ID to get unambiguous result for your city.
 
-You can download a List of CityIds in JSON in the [project Repo](https://github.com/shimphillip/open-weather-map/blob/master/city.list.json)
+You can download a List of CityIds in JSON in the [project Repo](https://github.com/shimphillip/openweathermap-ts/blob/master/city.list.json)
 
 Alternatively, you can also download them at [http://bulk.openweathermap.org/sample/](http://bulk.openweathermap.org/sample/)
 
@@ -66,7 +68,7 @@ openWeather
   .catch((error) => console.error('Error is ', error))
 ```
 
-You can also setup a cityId and use it
+You can also setup a cityId and don't pass any arguments
 
 ```js
 openWeather.setCityId(1835848)
@@ -150,6 +152,8 @@ openWeather.setUnits('metric')
 ### setLanguage
 
 Translation is applied for the city name and description fields.
+
+[List of avaliable languages](https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md)
 
 ```js
 openWeather.setUnits('kr')
