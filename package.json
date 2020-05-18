@@ -21,20 +21,21 @@
     "dev": "nodemon --exec ts-node src/app.ts --watch src",
     "test": "jest",
     "test:watch": "jest --watch",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
+    "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
+    "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
   },
   "dependencies": {
-    "@types/node-fetch": "^2.5.7",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
-    "dotenv": "^8.2.0",
+    "@types/node-fetch": "^2.5.7",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "nodemon": "^2.0.3",
-    "np": "^6.2.3",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.5.1",
     "ts-node": "^8.10.1",
