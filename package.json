@@ -9,8 +9,11 @@
   "keywords": [
     "openweathermap-ts",
     "open-weather",
+    "openweathermap",
     "weather",
-    "typescript"
+    "typescript",
+    "darkSky",
+    "weather-api"
   ],
   "scripts": {
     "build": "rimraf dist && tsc",

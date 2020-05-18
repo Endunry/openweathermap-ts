@@ -21,22 +21,22 @@ yarn add openweathermap-ts
 
 ```js
 // require the module (commonJS)
-const OpenWeatherMap = require('openweathermap-ts')
+const OpenWeatherMap = require('openweathermap-ts');
 // or import the module (ESM) if your app supports it
-import OpenWeatherMap from 'openweathermap-ts'
+import OpenWeatherMap from 'openweathermap-ts';
 
 // Make an instance with your API key
 const openWeather = new OpenWeatherMap({
-  apiKey: 'Your API Key',
-})
+  apiKey: 'Your API Key'
+});
 
 // default units and language: 'imperial' and 'en'
 // or pass additional options in. You can change these later
 const openWeather = new OpenWeatherMap({
   apiKey: 'Your API Key',
   units: 'metric', // imperial | metric | standard
-  language: 'kr',
-})
+  language: 'kr'
+});
 ```
 
 [List of avaliable languages](https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md)
@@ -61,32 +61,32 @@ The methods expect a cityId
 openWeather
   .getCurrentWeatherByCityId(1835848)
   .then((weather) => {
-    console.log('Weather object is', weather)
+    console.log('Weather object is', weather);
   })
-  .catch((error) => console.error('Error is ', error))
+  .catch((error) => console.error('Error is ', error));
 ```
 
 You can also setup a cityId and don't pass any arguments
 
 ```js
-openWeather.setCityId(1835848)
+openWeather.setCityId(1835848);
 
 openWeather
   .getThreeHourForecastByCityId()
   .then((weather) => {
-    console.log('Weather object is', weather)
+    console.log('Weather object is', weather);
   })
-  .catch((error) => console.error('Error is ', error))
+  .catch((error) => console.error('Error is ', error));
 ```
 
 Because the method returns a promise, async & await is allowed
 
 ```js
 try {
-  const weather = await openWeather.getCurrentWeatherByCityId(1835848)
-  console.log('Weather object is', weather)
+  const weather = await openWeather.getCurrentWeatherByCityId(1835848);
+  console.log('Weather object is', weather);
 } catch (error) {
-  console.error('Error is ', error)
+  console.error('Error is ', error);
 }
 ```
 
@@ -99,9 +99,9 @@ openWeather
   .getThreeHourForecastByCityName({
     cityName: 'Cedar Park',
     state: 'Texas',
-    countryCode: 'us',
+    countryCode: 'us'
   })
-  .then((weather) => console.log('Weather object is', weather))
+  .then((weather) => console.log('Weather object is', weather));
 ```
 
 ### getCurrentWeatherByGeoCoordinates & getThreeHourForecastByGeoCoordinates
@@ -109,7 +109,7 @@ openWeather
 ```js
 openWeather
   .getCurrentWeatherByGeoCoordinates(33.426971, -117.611992)
-  .then((weather) => console.log('Weather object is', weather))
+  .then((weather) => console.log('Weather object is', weather));
 ```
 
 ### getCurrentWeatherByZipcode & getThreeHourForecastByZipcode
@@ -117,7 +117,7 @@ openWeather
 ```js
 openWeather
   .getCurrentWeatherByZipcode(84604)
-  .then((data) => console.log('Weather object is', data))
+  .then((data) => console.log('Weather object is', data));
 ```
 
 you can also optionally pass in a countryCode to get more accurate location
@@ -125,7 +125,7 @@ you can also optionally pass in a countryCode to get more accurate location
 ```js
 openWeather
   .getCurrentWeatherByZipcode(84604, 'us')
-  .then((data) => console.log('Weather object is', data))
+  .then((data) => console.log('Weather object is', data));
 ```
 
 ---
@@ -134,62 +134,58 @@ openWeather
 
 ```js
 // setApiKey
-openWeather.setApiKey('Your changed API key')
+openWeather.setApiKey('Your changed API key');
 
 // setUnits
 // 'imperial' (Fahrenheit) | 'metric' (Celsius) | 'standard' (Kelvin)
-openWeather.setUnits('metric')
+openWeather.setUnits('metric');
 
 // setLanguage
 // Translation is applied for the city name and description fields.
 // Find them here: https://github.com/shimphillip/openweathermap-ts/blob/master/languages.md
-
-openWeather.setUnits('kr')
+openWeather.setUnits('kr');
 
 // clearSettings
 // The above three properties are stored in `settings` object. You can clean out all the properties
 // Note: this also wipes out your API Key_
-
-openWeather.clearSettings()
+openWeather.clearSettings();
 
 // setCityId
-openWeather.setCityId(1835848)
+openWeather.setCityId(1835848);
 
 // setCityName
 //state and countryCode are optional
-
 openWeather.setCityName({
-  cityName: 'Austin',
-})
+  cityName: 'Austin'
+});
 
 // or
-
 openWeather.setCityName({
   cityName: 'Austin',
-  state: 'Texas',
-})
+  state: 'Texas'
+});
 
 // setGeoCoordinates
-openWeather.setGeoCoordinates(33.426971, -117.611992)
+openWeather.setGeoCoordinates(33.426971, -117.611992);
 
 // setZipCode
 // 2nd argument Country Code is optional
-openWeather.setZipCode(84604)
+openWeather.setZipCode(84604);
 
 // or
-openWeather.setZipCode(84604, 'us')
+openWeather.setZipCode(84604, 'us');
 
 // clearLocation
 // The above location setter methods belong to the `location` object. Invoking clearLocation sets the object back to default.
-openWeather.clearLocation()
+openWeather.clearLocation();
 
 // getAllSettings
 // You can view what you stored inside your `settings` object
-openWeather.getAllSettings()
+openWeather.getAllSettings();
 
 // getAllLocations
 // You can view what you stored inside your `location` object
-openWeather.getAllLocations()
+openWeather.getAllLocations();
 ```
 
 ## Bug Reports
@@ -204,7 +200,7 @@ Please create issues or pull requests at https://github.com/shimphillip/openweat
 - Enforce strict rules on countryCodes and states
 - support for paid services like Daily Forecast and Hourly Forecast
 
---- 
+---
 
 Love what you use? Buy me a ~~coffee~~ boba!🍹
 
