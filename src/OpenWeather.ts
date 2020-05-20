@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 import {
   Unit,
   CountryCode,
@@ -9,32 +9,32 @@ import {
   SetCurrentWeatherByCityName,
   GetByCityName,
   GetByCityId,
-  GetByGeoCoordinates,
-} from './types'
-import { HOST, API_VERSION } from './helpers'
+  GetByGeoCoordinates
+} from './types';
+import { HOST, API_VERSION } from './helpers';
 
 class OpenWeather {
-  private settings: InitialSettings
-  private BASE_URL: string
-  private location: Location
+  private settings: InitialSettings;
+  private BASE_URL: string;
+  private location: Location;
 
   constructor({
     apiKey,
     units = 'imperial',
-    language = 'en',
+    language = 'en'
   }: InitialSettings) {
     this.settings = {
       apiKey,
       units,
-      language,
-    }
+      language
+    };
     this.location = {
       city: {},
       cityId: undefined,
       geoCoordinates: {},
-      zipcode: {},
-    }
-    this.BASE_URL = HOST + API_VERSION
+      zipcode: {}
+    };
+    this.BASE_URL = HOST + API_VERSION;
   }
 
   // ***
@@ -44,56 +44,56 @@ class OpenWeather {
   // ***
 
   public setApiKey(apiKey: string) {
-    this.settings.apiKey = apiKey
+    this.settings.apiKey = apiKey;
   }
 
   public setUnits(units: Unit) {
-    this.settings.units = units
+    this.settings.units = units;
   }
 
   public setLanguage(language: Language) {
-    this.settings.language = language
+    this.settings.language = language;
   }
 
   public setCityName({
     cityName,
     state,
-    countryCode,
+    countryCode
   }: SetCurrentWeatherByCityName) {
     this.location.city = {
       ...this.location.city,
       cityName,
       state,
-      countryCode,
-    }
+      countryCode
+    };
   }
 
   public setCityId(cityId: number) {
-    this.location.cityId = cityId
+    this.location.cityId = cityId;
   }
 
   public setGeoCoordinates(latitude: number, longitude: number) {
     this.location.geoCoordinates = {
       ...this.location.geoCoordinates,
       latitude,
-      longitude,
-    }
+      longitude
+    };
   }
 
   public setZipCode(zipcode: number, countryCode?: CountryCode) {
     this.location.zipcode = {
       ...this.location.zipcode,
       zipcode,
-      countryCode,
-    }
+      countryCode
+    };
   }
 
   public clearSettings() {
     this.settings = {
       apiKey: 'youNeedValidApiKey',
       units: 'imperial',
-      language: 'en',
-    }
+      language: 'en'
+    };
   }
 
   public clearLocation() {
@@ -101,8 +101,8 @@ class OpenWeather {
       city: {},
       cityId: undefined,
       geoCoordinates: {},
-      zipcode: {},
-    }
+      zipcode: {}
+    };
   }
 
   // ***
@@ -112,11 +112,11 @@ class OpenWeather {
   // ***
 
   public getAllSettings() {
-    return this.settings
+    return this.settings;
   }
 
   public getAllLocations() {
-    return this.location
+    return this.location;
   }
 
   // ***
@@ -126,9 +126,11 @@ class OpenWeather {
   // ***
 
   private buildURL(queryType: QueryType, query: string) {
-    const { BASE_URL, settings } = this
+    const { BASE_URL, settings } = this;
 
-    return `${BASE_URL + queryType}?${query}&appid=${settings.apiKey}`
+    return `${BASE_URL + queryType}?${query}&appid=${settings.apiKey}&units=${
+      settings.units
+    }&lang=${settings.language}`;
   }
 
   // ***
@@ -143,59 +145,59 @@ class OpenWeather {
         if (!location?.cityName && !this.location.city.cityName) {
           throw new Error(
             `cityName missing, please pass it via argument or set it using setCityName method`
-          )
+          );
         }
 
-        const cityName = location?.cityName || this.location.city.cityName
-        const state = location?.state || this.location.city.state
+        const cityName = location?.cityName || this.location.city.cityName;
+        const state = location?.state || this.location.city.state;
         const countryCode =
-          location?.countryCode || this.location.city.countryCode
+          location?.countryCode || this.location.city.countryCode;
 
         const query = `q=${cityName}${state ? ',' + state : ''}${
           countryCode ? ',' + countryCode : ''
-        }`
-        const request = this.buildURL(queryType, query)
+        }`;
+        const request = this.buildURL(queryType, query);
 
-        const response = await fetch(request)
-        const currentWeather = await response.json()
+        const response = await fetch(request);
+        const currentWeather = await response.json();
 
-        resolve(currentWeather)
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public getByCityId({ cityId, queryType }: GetByCityId) {
     return new Promise(async (resolve, reject) => {
       try {
-        const { location } = this
+        const { location } = this;
 
         if (!cityId && !location.cityId) {
           throw new Error(
             `cityId missing, please pass it via argument or set it using setCityId method`
-          )
+          );
         }
 
-        cityId = cityId || location.cityId
+        cityId = cityId || location.cityId;
 
-        const query = `id=${cityId}`
-        const request = this.buildURL(queryType, query)
+        const query = `id=${cityId}`;
+        const request = this.buildURL(queryType, query);
 
-        const response = await fetch(request)
-        const currentWeather = await response.json()
+        const response = await fetch(request);
+        const currentWeather = await response.json();
 
-        resolve(currentWeather)
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public getByGeoCoordinates({
     latitude,
     longitude,
-    queryType,
+    queryType
   }: GetByGeoCoordinates) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -206,23 +208,23 @@ class OpenWeather {
         ) {
           throw new Error(
             `latitude or longitude missing, please pass it via argument or set it using setGeoCoordinates method`
-          )
+          );
         }
 
-        latitude = latitude || this.location.geoCoordinates.latitude
-        longitude = longitude || this.location.geoCoordinates.longitude
+        latitude = latitude || this.location.geoCoordinates.latitude;
+        longitude = longitude || this.location.geoCoordinates.longitude;
 
-        const query = `lat=${latitude}&lon=${longitude}`
-        const request = this.buildURL(queryType, query)
+        const query = `lat=${latitude}&lon=${longitude}`;
+        const request = this.buildURL(queryType, query);
 
-        const response = await fetch(request)
-        const currentWeather = await response.json()
+        const response = await fetch(request);
+        const currentWeather = await response.json();
 
-        resolve(currentWeather)
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 
   public getByZipcode(
@@ -232,28 +234,28 @@ class OpenWeather {
   ) {
     return new Promise(async (resolve, reject) => {
       try {
-        const { location } = this
+        const { location } = this;
 
         if (!zipcode && !location.zipcode.zipcode) {
           throw new Error(
             `zipcode missing, please pass it via argument or set it using setZipcode method`
-          )
+          );
         }
 
-        zipcode = zipcode || location.zipcode.zipcode
+        zipcode = zipcode || location.zipcode.zipcode;
 
-        const query = `zip=${zipcode}${countryCode ? ',' + countryCode : ''}`
-        const request = this.buildURL(queryType, query)
+        const query = `zip=${zipcode}${countryCode ? ',' + countryCode : ''}`;
+        const request = this.buildURL(queryType, query);
 
-        const response = await fetch(request)
-        const currentWeather = await response.json()
+        const response = await fetch(request);
+        const currentWeather = await response.json();
 
-        resolve(currentWeather)
+        resolve(currentWeather);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
+    });
   }
 }
 
-export default OpenWeather
+export default OpenWeather;

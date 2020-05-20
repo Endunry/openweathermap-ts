@@ -55,13 +55,13 @@ var OpenWeather = /** @class */ (function () {
         this.settings = {
             apiKey: apiKey,
             units: units,
-            language: language,
+            language: language
         };
         this.location = {
             city: {},
             cityId: undefined,
             geoCoordinates: {},
-            zipcode: {},
+            zipcode: {}
         };
         this.BASE_URL = helpers_1.HOST + helpers_1.API_VERSION;
     }
@@ -100,7 +100,7 @@ var OpenWeather = /** @class */ (function () {
         this.settings = {
             apiKey: 'youNeedValidApiKey',
             units: 'imperial',
-            language: 'en',
+            language: 'en'
         };
     };
     OpenWeather.prototype.clearLocation = function () {
@@ -108,7 +108,7 @@ var OpenWeather = /** @class */ (function () {
             city: {},
             cityId: undefined,
             geoCoordinates: {},
-            zipcode: {},
+            zipcode: {}
         };
     };
     // ***
@@ -129,7 +129,7 @@ var OpenWeather = /** @class */ (function () {
     // ***
     OpenWeather.prototype.buildURL = function (queryType, query) {
         var _a = this, BASE_URL = _a.BASE_URL, settings = _a.settings;
-        return BASE_URL + queryType + "?" + query + "&appid=" + settings.apiKey;
+        return BASE_URL + queryType + "?" + query + "&appid=" + settings.apiKey + "&units=" + settings.units + "&lang=" + settings.language;
     };
     // ***
     // ***

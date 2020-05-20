@@ -1,3 +1,7 @@
+#### 1.2.3 (2020-05-20)
+
+- Fix unit and langauge bugs.
+
 #### 1.2.2 (2020-05-20)
 
 - Update README.md, fix typos and add additional clarifying information
