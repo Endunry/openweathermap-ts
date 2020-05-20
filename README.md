@@ -4,7 +4,7 @@
 [![npm version](https://badge.fury.io/js/openweathermap-ts.svg)](https://badge.fury.io/js/openweathermap-ts)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/shimphillip)
 
-An abstract layer over openWeatherMap APIs to simplify making calls built with TypeScript and Promises.
+An abstract layer over openWeatherMap APIs to simplify making calls built with TypeScript and Promises. Even the returned JSON responses are typed!
 **Note:** The library currently only supports free tier API services:
 
 - Current Weather
