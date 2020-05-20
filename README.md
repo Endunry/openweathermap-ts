@@ -4,7 +4,9 @@
 [![npm version](https://badge.fury.io/js/openweathermap-ts.svg)](https://badge.fury.io/js/openweathermap-ts)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/shimphillip)
 
-An abstract layer over openWeatherMap APIs to simplify making calls built with TypeScript and Promises. Even the returned JSON responses are typed!
+An abstract layer over openWeatherMap APIs to simplify making calls. Built with TypeScript and Promises.
+Even the returned JSON responses are typed for your benefits!
+
 **Note:** The library currently only supports free tier API services:
 
 - Current Weather
@@ -35,12 +37,12 @@ const openWeather = new OpenWeatherMap({
 
 There are 2 ways of using public getter methods.
 
-1. You can pass in argument/s
+1. Pass in argument/s
 2. Store preferences in the [location object](#Helpers-for-location-object)
 
-When both are used, the argument/s precede over defined location object.
+When both are used, the argument/s precede over the defined location object.
 
-Notice some methods are grouped together by & because their arguments are the same put output different results.
+Notice some methods are grouped together with & because their arguments are the same. But they produce different results.
 
 ---
 
@@ -150,7 +152,7 @@ List of [CountryCodeType](https://github.com/shimphillip/openweathermap-ts/blob/
 /**
  * @param apiKey: string
  */
-openWeather.setApiKey('Your changed API key');
+openWeather.setApiKey('yourApiKey');
 
 /**
  * @param units: 'imperial'| 'metric' | 'standard' (Kelvin)
@@ -194,7 +196,7 @@ openWeather.setCityId(1835848);
 openWeather.setCityName({
   cityName: 'Austin'
 });
-// List of CountryCodeType https://github.com/shimphillip/openweathermap-ts/blob/master/src/helpers/country-codes.ts
+// List of CountryCodeTypes https://github.com/shimphillip/openweathermap-ts/blob/master/src/helpers/country-codes.ts
 
 /**
  * @params latitude: number, longitude: number

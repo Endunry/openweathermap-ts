@@ -1,3 +1,7 @@
+#### 1.2.2 (2020-05-20)
+
+- Update README.md, fix typos and add additional clarifying information
+
 #### 1.2.1 (2020-05-18)
 
 - Update country codes and README.md
