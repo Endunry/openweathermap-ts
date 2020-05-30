@@ -1,3 +1,7 @@
+#### 1.2.5 (2020-05-30)
+
+- Correct repo url
+
 #### 1.2.4 (2020-05-30)
 
 - Add github repo url to the npm library
