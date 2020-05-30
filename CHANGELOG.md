@@ -1,3 +1,7 @@
+#### 1.2.6 (2020-05-30)
+
+- reduce package size
+
 #### 1.2.5 (2020-05-30)
 
 - Correct repo url

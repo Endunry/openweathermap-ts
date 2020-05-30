@@ -6,6 +6,9 @@
   "types": "dist/app.d.ts",
   "author": "Phillip Shim",
   "license": "MIT",
+  "files": [
+    "dist/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/shimphillip/openweathermap-ts"
