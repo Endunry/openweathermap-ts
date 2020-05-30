@@ -75,7 +75,7 @@ try {
 }
 ```
 
-List of [CountryCodeType](https://github.com/shimphillip/openweathermap-ts/blob/master/src/helpers/country-codes.ts)
+List of ISO 3166 [CountryCodeType](https://github.com/shimphillip/openweathermap-ts/blob/master/src/helpers/country-codes.ts)
 
 ## getCurrentWeatherByCityId & getThreeHourForecastByCityId
 
@@ -190,7 +190,7 @@ openWeather.setCityId(1835848);
  * @param {
  *  cityName: string,
  *  state?: string, // (optional) Spell it out. E.g, Texas
- *  countryCode?: CountryCodeTypes // (optional) 
+ *  countryCode?: CountryCodeTypes // (optional)
  * }
  */
 openWeather.setCityName({
@@ -221,6 +221,11 @@ openWeather.clearLocation();
 ```
 
 &nbsp;
+
+## Official API Docs
+
+Current Weather API: https://openweathermap.org/current
+5 day / 3 hour Forecast API: https://openweathermap.org/forecast5
 
 ## Bug Reports
 

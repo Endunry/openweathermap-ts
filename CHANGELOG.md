@@ -1,3 +1,7 @@
+#### 1.2.4 (2020-05-30)
+
+- Add github repo url to the npm library
+
 #### 1.2.3 (2020-05-20)
 
 - Fix unit and langauge bugs.

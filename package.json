@@ -6,6 +6,10 @@
   "types": "dist/app.d.ts",
   "author": "Phillip Shim",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twbs/bootstrap.git"
+  },
   "keywords": [
     "openweathermap-ts",
     "open-weather",
