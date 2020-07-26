@@ -2,7 +2,6 @@ import { Unit, CountryCode } from './index';
 export interface Settings {
     units?: Unit;
     language?: string;
-    [key: string]: string;
 }
 export interface InitialSettings extends Settings {
     apiKey: string;
