@@ -1,3 +1,7 @@
+#### 1.2.7 (2020-07-30)
+
+- Fix language bug
+
 #### 1.2.6 (2020-05-30)
 
 - reduce package size
