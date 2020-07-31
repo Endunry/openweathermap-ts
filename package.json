@@ -1,6 +1,6 @@
 {
   "name": "openweathermap-ts",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "An abstract layer over openWeatherMap APIs",
   "main": "dist/app.js",
   "types": "dist/app.d.ts",
