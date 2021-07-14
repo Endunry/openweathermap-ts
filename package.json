@@ -1,10 +1,10 @@
 {
   "name": "openweathermap-ts",
-  "version": "1.2.7",
-  "description": "An abstract layer over openWeatherMap APIs",
+  "version": "1.2.8",
+  "description": "Fork for fix, an abstract layer over openWeatherMap APIs",
   "main": "dist/app.js",
   "types": "dist/app.d.ts",
-  "author": "Phillip Shim",
+  "author": "Phillip Shim, devlooskie",
   "license": "MIT",
   "files": [
     "dist/*"
