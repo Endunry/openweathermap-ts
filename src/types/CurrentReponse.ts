@@ -2,10 +2,7 @@
 // https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=439d4b804bc8187953eb36d2a8c26a02
 
 const data = {
-  coord: {
-    lon: -0.13,
-    lat: 51.51
-  },
+  coord: { lon: -0.13, lat: 51.51 },
   weather: [
     {
       id: 300,
@@ -22,13 +19,9 @@ const data = {
     temp_min: 279.15,
     temp_max: 281.15
   },
-  wind: {
-    speed: 4.1,
-    deg: 80
-  },
-  clouds: {
-    all: 90
-  },
+  visibility: 10000,
+  wind: { speed: 4.1, deg: 80 },
+  clouds: { all: 90 },
   dt: 1485789600,
   sys: {
     type: 1,

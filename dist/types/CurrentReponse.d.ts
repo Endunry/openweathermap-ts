@@ -17,6 +17,7 @@ declare const data: {
         temp_min: number;
         temp_max: number;
     };
+    visibility: number;
     wind: {
         speed: number;
         deg: number;
