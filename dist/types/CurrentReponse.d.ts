@@ -12,10 +12,11 @@ declare const data: {
     base: string;
     main: {
         temp: number;
-        pressure: number;
-        humidity: number;
+        feels_like: number;
         temp_min: number;
         temp_max: number;
+        pressure: number;
+        humidity: number;
     };
     visibility: number;
     wind: {
@@ -29,11 +30,11 @@ declare const data: {
     sys: {
         type: number;
         id: number;
-        message: number;
         country: string;
         sunrise: number;
         sunset: number;
     };
+    timezone: number;
     id: number;
     name: string;
     cod: number;
