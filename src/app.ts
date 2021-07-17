@@ -49,7 +49,7 @@ class OpenWeatherMap extends OpenWeather {
         const currentWeather = (await this.getByGeoCoordinates({
           latitude,
           longitude,
-          queryType: FORECAST
+          queryType: WEATHER
         })) as CurrentResponse;
 
         resolve(currentWeather);
