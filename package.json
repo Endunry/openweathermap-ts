@@ -4,7 +4,7 @@
   "description": "An abstract layer over openWeatherMap APIs",
   "main": "dist/app.js",
   "types": "dist/app.d.ts",
-  "author": "Phillip Shim, devlooskie",
+  "author": "Phillip Shim",
   "license": "MIT",
   "files": [
     "dist/*"
