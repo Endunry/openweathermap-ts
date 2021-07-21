@@ -1,3 +1,7 @@
+#### 1.2.9 (2021-07-17)
+
+- Updated types with CurrentResponse
+
 #### 1.2.8 (2021-07-16)
 
 - Fix bug where it returns the forecast of the geocoords instead of the actual weather.
