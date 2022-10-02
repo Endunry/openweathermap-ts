@@ -81,20 +81,16 @@ var OpenWeather = /** @class */ (function () {
     };
     OpenWeather.prototype.setCityName = function (_a) {
         var cityName = _a.cityName, state = _a.state, countryCode = _a.countryCode;
-        this.location.city = __assign(__assign({}, this.location.city), { cityName: cityName,
-            state: state,
-            countryCode: countryCode });
+        this.location.city = __assign(__assign({}, this.location.city), { cityName: cityName, state: state, countryCode: countryCode });
     };
     OpenWeather.prototype.setCityId = function (cityId) {
         this.location.cityId = cityId;
     };
     OpenWeather.prototype.setGeoCoordinates = function (latitude, longitude) {
-        this.location.geoCoordinates = __assign(__assign({}, this.location.geoCoordinates), { latitude: latitude,
-            longitude: longitude });
+        this.location.geoCoordinates = __assign(__assign({}, this.location.geoCoordinates), { latitude: latitude, longitude: longitude });
     };
     OpenWeather.prototype.setZipCode = function (zipcode, countryCode) {
-        this.location.zipcode = __assign(__assign({}, this.location.zipcode), { zipcode: zipcode,
-            countryCode: countryCode });
+        this.location.zipcode = __assign(__assign({}, this.location.zipcode), { zipcode: zipcode, countryCode: countryCode });
     };
     OpenWeather.prototype.clearSettings = function () {
         this.settings = {
@@ -129,7 +125,7 @@ var OpenWeather = /** @class */ (function () {
     // ***
     OpenWeather.prototype.buildURL = function (queryType, query) {
         var _a = this, BASE_URL = _a.BASE_URL, settings = _a.settings;
-        return BASE_URL + queryType + "?" + query + "&appid=" + settings.apiKey + "&units=" + settings.units + "&lang=" + settings.language;
+        return "".concat(BASE_URL + queryType, "?").concat(query, "&appid=").concat(settings.apiKey, "&units=").concat(settings.units, "&lang=").concat(settings.language);
     };
     // ***
     // ***
@@ -151,9 +147,9 @@ var OpenWeather = /** @class */ (function () {
                         cityName = (location === null || location === void 0 ? void 0 : location.cityName) || this.location.city.cityName;
                         state = (location === null || location === void 0 ? void 0 : location.state) || this.location.city.state;
                         countryCode = (location === null || location === void 0 ? void 0 : location.countryCode) || this.location.city.countryCode;
-                        query = "q=" + cityName + (state ? ',' + state : '') + (countryCode ? ',' + countryCode : '');
+                        query = "q=".concat(cityName).concat(state ? ',' + state : '').concat(countryCode ? ',' + countryCode : '');
                         request = this.buildURL(queryType, query);
-                        return [4 /*yield*/, node_fetch_1.default(request)];
+                        return [4 /*yield*/, (0, node_fetch_1.default)(request)];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.json()];
@@ -184,9 +180,9 @@ var OpenWeather = /** @class */ (function () {
                             throw new Error("cityId missing, please pass it via argument or set it using setCityId method");
                         }
                         cityId = cityId || location_1.cityId;
-                        query = "id=" + cityId;
+                        query = "id=".concat(cityId);
                         request = this.buildURL(queryType, query);
-                        return [4 /*yield*/, node_fetch_1.default(request)];
+                        return [4 /*yield*/, (0, node_fetch_1.default)(request)];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.json()];
@@ -219,9 +215,9 @@ var OpenWeather = /** @class */ (function () {
                         }
                         latitude = latitude || this.location.geoCoordinates.latitude;
                         longitude = longitude || this.location.geoCoordinates.longitude;
-                        query = "lat=" + latitude + "&lon=" + longitude;
+                        query = "lat=".concat(latitude, "&lon=").concat(longitude);
                         request = this.buildURL(queryType, query);
-                        return [4 /*yield*/, node_fetch_1.default(request)];
+                        return [4 /*yield*/, (0, node_fetch_1.default)(request)];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.json()];
@@ -251,9 +247,9 @@ var OpenWeather = /** @class */ (function () {
                             throw new Error("zipcode missing, please pass it via argument or set it using setZipcode method");
                         }
                         zipcode = zipcode || location_2.zipcode.zipcode;
-                        query = "zip=" + zipcode + (countryCode ? ',' + countryCode : '');
+                        query = "zip=".concat(zipcode).concat(countryCode ? ',' + countryCode : '');
                         request = this.buildURL(queryType, query);
-                        return [4 /*yield*/, node_fetch_1.default(request)];
+                        return [4 /*yield*/, (0, node_fetch_1.default)(request)];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.json()];
