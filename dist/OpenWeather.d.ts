@@ -10,7 +10,7 @@ declare class OpenWeather {
     setCityName({ cityName, state, countryCode }: SetCurrentWeatherByCityName): void;
     setCityId(cityId: number): void;
     setGeoCoordinates(latitude: number, longitude: number): void;
-    setZipCode(zipcode: number, countryCode?: CountryCode): void;
+    setZipCode(zipcode: string, countryCode?: CountryCode): void;
     clearSettings(): void;
     clearLocation(): void;
     getAllSettings(): InitialSettings;
@@ -19,6 +19,6 @@ declare class OpenWeather {
     getByCityName({ location, queryType }: GetByCityName): Promise<unknown>;
     getByCityId({ cityId, queryType }: GetByCityId): Promise<unknown>;
     getByGeoCoordinates({ latitude, longitude, queryType }: GetByGeoCoordinates): Promise<unknown>;
-    getByZipcode(zipcode: number, queryType: QueryType, countryCode?: CountryCode): Promise<unknown>;
+    getByZipcode(zipcode: string, queryType: QueryType, countryCode?: CountryCode): Promise<unknown>;
 }
 export default OpenWeather;

@@ -80,7 +80,7 @@ class OpenWeather {
     };
   }
 
-  public setZipCode(zipcode: number, countryCode?: CountryCode) {
+  public setZipCode(zipcode: string, countryCode?: CountryCode) {
     this.location.zipcode = {
       ...this.location.zipcode,
       zipcode,
@@ -228,7 +228,7 @@ class OpenWeather {
   }
 
   public getByZipcode(
-    zipcode: number,
+    zipcode: string,
     queryType: QueryType,
     countryCode?: CountryCode
   ) {

@@ -78,10 +78,10 @@ describe(`testing initial state and state getters and setters`, () => {
   });
 
   it(`should use setZipcode correctly`, () => {
-    openWeather.setZipCode(78754);
+    openWeather.setZipCode('08754');
 
     const zipcode = openWeather.getAllLocations().zipcode.zipcode;
-    expect(zipcode).toBe(78754);
+    expect(zipcode).toBe('08754');
   });
 
   it(`should use clearLocation correctly`, () => {
