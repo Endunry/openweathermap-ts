@@ -21,7 +21,7 @@ export interface Location {
     longitude?: number
   }
   zipcode: {
-    zipcode?: number
+    zipcode?: string
     countryCode?: string
   }
 }

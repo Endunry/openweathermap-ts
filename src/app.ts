@@ -60,7 +60,7 @@ class OpenWeatherMap extends OpenWeather {
   }
 
   public async getCurrentWeatherByZipcode(
-    zipcode?: number,
+    zipcode?: string,
     countryCode?: CountryCode
   ): Promise<CurrentResponse> {
     return new Promise(async (resolve, reject) => {
@@ -131,7 +131,7 @@ class OpenWeatherMap extends OpenWeather {
   }
 
   public async getThreeHourForecastByZipcode(
-    zipcode?: number,
+    zipcode?: string,
     countryCode?: CountryCode
   ): Promise<ThreeHourResponse> {
     return new Promise(async (resolve, reject) => {
