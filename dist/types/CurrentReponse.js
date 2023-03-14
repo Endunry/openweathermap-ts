@@ -1,47 +1,53 @@
 "use strict";
-// 20200516233806
-// https://openweathermap.org/data/2.5/weather?q=London,uk&appid=439d4b804bc8187953eb36d2a8c26a02
+// retrieved 03-14-2023
+// https://openweathermap.org/current
 Object.defineProperty(exports, "__esModule", { value: true });
 var data = {
-    coord: {
-        lon: -0.1257,
-        lat: 51.5085
+    "coord": {
+        "lon": 10.99,
+        "lat": 44.34
     },
-    weather: [
+    "weather": [
         {
-            id: 800,
-            main: 'Clear',
-            description: 'clear sky',
-            icon: '01d'
+            "id": 501,
+            "main": "Rain",
+            "description": "moderate rain",
+            "icon": "10d"
         }
     ],
-    base: 'stations',
-    main: {
-        temp: 23.6,
-        feels_like: 23.69,
-        temp_min: 18.92,
-        temp_max: 25.98,
-        pressure: 1028,
-        humidity: 64
+    "base": "stations",
+    "main": {
+        "temp": 298.48,
+        "feels_like": 298.74,
+        "temp_min": 297.56,
+        "temp_max": 300.05,
+        "pressure": 1015,
+        "humidity": 64,
+        "sea_level": 1015,
+        "grnd_level": 933
     },
-    visibility: 10000,
-    wind: {
-        speed: 4.12,
-        deg: 100
+    "visibility": 10000,
+    "wind": {
+        "speed": 0.62,
+        "deg": 349,
+        "gust": 1.18
     },
-    clouds: {
-        all: 0
+    "rain": {
+        "1h": 3.16
     },
-    dt: 1626552114,
-    sys: {
-        type: 2,
-        id: 268730,
-        country: 'GB',
-        sunrise: 1626494599,
-        sunset: 1626552575
+    "clouds": {
+        "all": 100
     },
-    timezone: 3600,
-    id: 2643743,
-    name: 'London',
-    cod: 200
+    "dt": 1661870592,
+    "sys": {
+        "type": 2,
+        "id": 2075663,
+        "country": "IT",
+        "sunrise": 1661834187,
+        "sunset": 1661882248
+    },
+    "timezone": 7200,
+    "id": 3163858,
+    "name": "Zocca",
+    "cod": 200
 };
