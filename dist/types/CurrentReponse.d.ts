@@ -17,11 +17,17 @@ declare const data: {
         temp_max: number;
         pressure: number;
         humidity: number;
+        sea_level: number;
+        grnd_level: number;
     };
     visibility: number;
     wind: {
         speed: number;
         deg: number;
+        gust: number;
+    };
+    rain: {
+        "1h": number;
     };
     clouds: {
         all: number;
@@ -39,8 +45,5 @@ declare const data: {
     name: string;
     cod: number;
 };
-declare type Visibility = {
-    visibility?: number;
-};
-export declare type CurrentResponse = typeof data & Visibility;
+export declare type CurrentResponse = typeof data;
 export {};
