@@ -60,7 +60,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
     }
     /**
      *
-     * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+     * @deprecated Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin).
      */
     OpenWeatherMap.prototype.getCurrentWeatherByCityName = function (location) {
         var _this = this;
@@ -72,7 +72,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.getByCityName({
                                 location: location,
-                                queryType: helpers_1.WEATHER
+                                queryType: helpers_1.CURRENT_WEATHER_ENDPOINT
                             })];
                     case 1:
                         currentWeather = (_a.sent());
@@ -103,7 +103,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                                     _a.trys.push([0, 2, , 3]);
                                     return [4 /*yield*/, this.getByCityId({
                                             cityId: cityId,
-                                            queryType: helpers_1.WEATHER
+                                            queryType: helpers_1.CURRENT_WEATHER_ENDPOINT
                                         })];
                                 case 1:
                                     currentWeather = (_a.sent());
@@ -133,7 +133,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                                     return [4 /*yield*/, this.getByGeoCoordinates({
                                             latitude: latitude,
                                             longitude: longitude,
-                                            queryType: helpers_1.WEATHER
+                                            queryType: helpers_1.CURRENT_WEATHER_ENDPOINT
                                         })];
                                 case 1:
                                     currentWeather = (_a.sent());
@@ -164,7 +164,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                             switch (_a.label) {
                                 case 0:
                                     _a.trys.push([0, 2, , 3]);
-                                    return [4 /*yield*/, this.getByZipcode(zipcode, helpers_1.WEATHER, countryCode)];
+                                    return [4 /*yield*/, this.getByZipcode(zipcode, helpers_1.CURRENT_WEATHER_ENDPOINT, countryCode)];
                                 case 1:
                                     currentWeather = (_a.sent());
                                     resolve(currentWeather);

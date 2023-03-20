@@ -5,13 +5,13 @@ import {
   CurrentWeatherResponse,
   ThreeHourResponse
 } from './types';
-import { WEATHER, FORECAST } from './helpers';
+import { CURRENT_WEATHER_ENDPOINT, FORECAST } from './helpers';
 
 class OpenWeatherMap extends OpenWeather {
 
   /**
    * 
-   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+   * @deprecated Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin).
    */
   public getCurrentWeatherByCityName(
     location?: GetByCityNameChild
@@ -20,7 +20,7 @@ class OpenWeatherMap extends OpenWeather {
       try {
         const currentWeather = (await this.getByCityName({
           location,
-          queryType: WEATHER
+          queryType: CURRENT_WEATHER_ENDPOINT
         })) as CurrentWeatherResponse;
         resolve(currentWeather);
       } catch (error) {
@@ -40,7 +40,7 @@ class OpenWeatherMap extends OpenWeather {
       try {
         const currentWeather = (await this.getByCityId({
           cityId,
-          queryType: WEATHER
+          queryType: CURRENT_WEATHER_ENDPOINT
         })) as CurrentWeatherResponse;
         resolve(currentWeather);
       } catch (error) {
@@ -58,7 +58,7 @@ class OpenWeatherMap extends OpenWeather {
         const currentWeather = (await this.getByGeoCoordinates({
           latitude,
           longitude,
-          queryType: WEATHER
+          queryType: CURRENT_WEATHER_ENDPOINT
         })) as CurrentWeatherResponse;
 
         resolve(currentWeather);
@@ -80,7 +80,7 @@ class OpenWeatherMap extends OpenWeather {
       try {
         const currentWeather = (await this.getByZipcode(
           zipcode,
-          WEATHER,
+          CURRENT_WEATHER_ENDPOINT,
           countryCode
         )) as CurrentWeatherResponse;
 

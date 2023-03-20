@@ -3,7 +3,7 @@ import { CountryCode, GetByCityNameChild, CurrentWeatherResponse, ThreeHourRespo
 declare class OpenWeatherMap extends OpenWeather {
     /**
      *
-     * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+     * @deprecated Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin).
      */
     getCurrentWeatherByCityName(location?: GetByCityNameChild): Promise<CurrentWeatherResponse>;
     /**

@@ -11,30 +11,29 @@ import {
   GetByCityId,
   GetByGeoCoordinates
 } from './types';
-import { HOST, API_VERSION } from './helpers';
+import { SCHEME, API_HOST, WEATHER_API_VERSION, WEATHER_API_NAME } from './helpers';
+import BaseAPI from './BaseAPI';
 
-class OpenWeather {
-  private settings: InitialSettings;
-  private BASE_URL: string;
+class OpenWeather extends BaseAPI {
   private location: Location;
 
   constructor({
     apiKey,
     units = 'imperial',
-    language = 'en'
+    language = 'en' 
   }: InitialSettings) {
-    this.settings = {
+    super({
       apiKey,
       units,
       language
-    };
+    })
+    this.BASE_URL += WEATHER_API_NAME + WEATHER_API_VERSION;
     this.location = {
       city: {},
       cityId: undefined,
       geoCoordinates: {},
       zipcode: {}
     };
-    this.BASE_URL = HOST + API_VERSION;
   }
 
   // ***
@@ -119,29 +118,49 @@ class OpenWeather {
     return this.location;
   }
 
-  // ***
-  // ***
-  // Private
-  // ***
-  // ***
-
-  private buildURL(queryType: QueryType, query: string) {
-    const { BASE_URL, settings } = this;
-
-    return `${BASE_URL + queryType}?${query}&appid=${settings.apiKey}&units=${
-      settings.units
-    }&lang=${settings.language}`;
-  }
 
   // ***
   // ***
   // Parent Getters
   // ***
   // ***
- /**
-  * 
-  * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
-  */
+  /**
+   * @summary Use the built-in API to get by city name (deprecated, but still useable)
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
+  public getByCityNameBuiltIn({ location, queryType }: GetByCityName) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (!location?.cityName && !this.location.city.cityName) {
+          throw new Error(
+            `cityName missing, please pass it via argument or set it using setCityName method`
+          );
+        }
+
+        const cityName = location?.cityName || this.location.city.cityName;
+        const state = location?.state || this.location.city.state;
+        const countryCode =
+          location?.countryCode || this.location.city.countryCode;
+
+        const query = `q=${cityName}${state ? ',' + state : ''}${countryCode ? ',' + countryCode : ''
+          }`;
+        const request = this.buildURL(queryType, query);
+
+        const response = await fetch(request);
+        const currentWeather = await response.json();
+
+        resolve(currentWeather);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+  
+
+
+  /**
+   * @summary Uses the Geocoding API to first get the coordinates of the city name, then uses the coordinates to get the weather data.
+   */
   public getByCityName({ location, queryType }: GetByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -156,9 +175,8 @@ class OpenWeather {
         const countryCode =
           location?.countryCode || this.location.city.countryCode;
 
-        const query = `q=${cityName}${state ? ',' + state : ''}${
-          countryCode ? ',' + countryCode : ''
-        }`;
+        const query = `q=${cityName}${state ? ',' + state : ''}${countryCode ? ',' + countryCode : ''
+          }`;
         const request = this.buildURL(queryType, query);
 
         const response = await fetch(request);

@@ -2,3 +2,4 @@
 yarn-error.log
 .prettierrc
 coverage/
+src/__tests__/apiRequests.test.ts
