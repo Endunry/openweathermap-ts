@@ -58,6 +58,10 @@ var OpenWeatherMap = /** @class */ (function (_super) {
     function OpenWeatherMap() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    /**
+     *
+     * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+     */
     OpenWeatherMap.prototype.getCurrentWeatherByCityName = function (location) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -83,6 +87,10 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         }); });
     };
+    /**
+    *
+    * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+    */
     OpenWeatherMap.prototype.getCurrentWeatherByCityId = function (cityId) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -142,6 +150,10 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         });
     };
+    /**
+  *
+  * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+  */
     OpenWeatherMap.prototype.getCurrentWeatherByZipcode = function (zipcode, countryCode) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -168,6 +180,10 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         });
     };
+    /**
+   *
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
     OpenWeatherMap.prototype.getThreeHourForecastByCityName = function (location) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -193,6 +209,10 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         }); });
     };
+    /**
+   *
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
     OpenWeatherMap.prototype.getThreeHourForecastByCityId = function (cityId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -244,6 +264,10 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         }); });
     };
+    /**
+   *
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
     OpenWeatherMap.prototype.getThreeHourForecastByZipcode = function (zipcode, countryCode) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;

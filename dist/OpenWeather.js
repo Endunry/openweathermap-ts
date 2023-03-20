@@ -132,6 +132,10 @@ var OpenWeather = /** @class */ (function () {
     // Parent Getters
     // ***
     // ***
+    /**
+     *
+     * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+     */
     OpenWeather.prototype.getByCityName = function (_a) {
         var _this = this;
         var location = _a.location, queryType = _a.queryType;
@@ -166,6 +170,10 @@ var OpenWeather = /** @class */ (function () {
             });
         }); });
     };
+    /**
+     *
+     * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+     */
     OpenWeather.prototype.getByCityId = function (_a) {
         var _this = this;
         var cityId = _a.cityId, queryType = _a.queryType;
@@ -234,6 +242,10 @@ var OpenWeather = /** @class */ (function () {
             });
         }); });
     };
+    /**
+   *
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
     OpenWeather.prototype.getByZipcode = function (zipcode, queryType, countryCode) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {

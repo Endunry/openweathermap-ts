@@ -138,7 +138,10 @@ class OpenWeather {
   // Parent Getters
   // ***
   // ***
-
+ /**
+  * 
+  * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+  */
   public getByCityName({ location, queryType }: GetByCityName) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -167,7 +170,10 @@ class OpenWeather {
       }
     });
   }
-
+  /**
+   * 
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
   public getByCityId({ cityId, queryType }: GetByCityId) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -193,6 +199,7 @@ class OpenWeather {
       }
     });
   }
+
 
   public getByGeoCoordinates({
     latitude,
@@ -227,6 +234,10 @@ class OpenWeather {
     });
   }
 
+  /**
+ * 
+ * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+ */
   public getByZipcode(
     zipcode: string,
     queryType: QueryType,

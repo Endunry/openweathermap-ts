@@ -8,6 +8,11 @@ import {
 import { WEATHER, FORECAST } from './helpers';
 
 class OpenWeatherMap extends OpenWeather {
+
+  /**
+   * 
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+   */
   public getCurrentWeatherByCityName(
     location?: GetByCityNameChild
   ): Promise<CurrentWeatherResponse> {
@@ -24,6 +29,10 @@ class OpenWeatherMap extends OpenWeather {
     });
   }
 
+  /**
+  * 
+  * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+  */
   public async getCurrentWeatherByCityId(
     cityId?: number
   ): Promise<CurrentWeatherResponse> {
@@ -59,6 +68,10 @@ class OpenWeatherMap extends OpenWeather {
     });
   }
 
+  /**
+* 
+* @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+*/
   public async getCurrentWeatherByZipcode(
     zipcode?: string,
     countryCode?: CountryCode
@@ -78,6 +91,10 @@ class OpenWeatherMap extends OpenWeather {
     });
   }
 
+  /**
+ * 
+ * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+ */
   public getThreeHourForecastByCityName(
     location?: GetByCityNameChild
   ): Promise<ThreeHourResponse> {
@@ -94,7 +111,10 @@ class OpenWeatherMap extends OpenWeather {
       }
     });
   }
-
+  /**
+ * 
+ * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+ */
   public getThreeHourForecastByCityId(
     cityId?: number
   ): Promise<ThreeHourResponse> {
@@ -130,6 +150,10 @@ class OpenWeatherMap extends OpenWeather {
     });
   }
 
+  /**
+ * 
+ * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+ */
   public async getThreeHourForecastByZipcode(
     zipcode?: string,
     countryCode?: CountryCode
