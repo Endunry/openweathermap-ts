@@ -2,7 +2,7 @@ import OpenWeather from './OpenWeather';
 import {
   CountryCode,
   GetByCityNameChild,
-  CurrentResponse,
+  CurrentWeatherResponse,
   ThreeHourResponse
 } from './types';
 import { WEATHER, FORECAST } from './helpers';
@@ -10,13 +10,13 @@ import { WEATHER, FORECAST } from './helpers';
 class OpenWeatherMap extends OpenWeather {
   public getCurrentWeatherByCityName(
     location?: GetByCityNameChild
-  ): Promise<CurrentResponse> {
+  ): Promise<CurrentWeatherResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const currentWeather = (await this.getByCityName({
           location,
           queryType: WEATHER
-        })) as CurrentResponse;
+        })) as CurrentWeatherResponse;
         resolve(currentWeather);
       } catch (error) {
         reject(error);
@@ -26,13 +26,13 @@ class OpenWeatherMap extends OpenWeather {
 
   public async getCurrentWeatherByCityId(
     cityId?: number
-  ): Promise<CurrentResponse> {
+  ): Promise<CurrentWeatherResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const currentWeather = (await this.getByCityId({
           cityId,
           queryType: WEATHER
-        })) as CurrentResponse;
+        })) as CurrentWeatherResponse;
         resolve(currentWeather);
       } catch (error) {
         reject(error);
@@ -43,14 +43,14 @@ class OpenWeatherMap extends OpenWeather {
   public async getCurrentWeatherByGeoCoordinates(
     latitude?: number,
     longitude?: number
-  ): Promise<CurrentResponse> {
+  ): Promise<CurrentWeatherResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const currentWeather = (await this.getByGeoCoordinates({
           latitude,
           longitude,
           queryType: WEATHER
-        })) as CurrentResponse;
+        })) as CurrentWeatherResponse;
 
         resolve(currentWeather);
       } catch (error) {
@@ -62,14 +62,14 @@ class OpenWeatherMap extends OpenWeather {
   public async getCurrentWeatherByZipcode(
     zipcode?: string,
     countryCode?: CountryCode
-  ): Promise<CurrentResponse> {
+  ): Promise<CurrentWeatherResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const currentWeather = (await this.getByZipcode(
           zipcode,
           WEATHER,
           countryCode
-        )) as CurrentResponse;
+        )) as CurrentWeatherResponse;
 
         resolve(currentWeather);
       } catch (error) {
