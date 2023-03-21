@@ -29,8 +29,9 @@ class Geocoding extends BaseAPI {
     public getGeoCoordinatesByLocationName(cityName: string, countryCode: CountryCode, stateCode?: string): Promise<DirectGeoResponse> {
         return new Promise<DirectGeoResponse>(async (resolve, reject) => {
             try {
-                const query = `q=${cityName},${stateCode},${countryCode}`;
+                const query = `q=${cityName || ''},${stateCode || ''},${countryCode || ''}`;
                 const requestUrl = this.buildURL(DIRECT_GEO, query);
+                console.log(requestUrl);
                 const response = await fetch(requestUrl);
                 const data = await response.json() as DirectGeoResponse;
                 resolve(data);

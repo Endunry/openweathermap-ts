@@ -81,8 +81,9 @@ var Geocoding = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        query = "q=".concat(cityName, ",").concat(stateCode, ",").concat(countryCode);
+                        query = "q=".concat(cityName || '', ",").concat(stateCode || '', ",").concat(countryCode || '');
                         requestUrl = this.buildURL(helpers_1.DIRECT_GEO, query);
+                        console.log(requestUrl);
                         return [4 /*yield*/, (0, node_fetch_1.default)(requestUrl)];
                     case 1:
                         response = _a.sent();

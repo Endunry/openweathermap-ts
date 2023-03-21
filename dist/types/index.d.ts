@@ -5,4 +5,4 @@ export * from './QueryType';
 export * from './Constructor';
 export * from './Methods';
 export * from './ThreeHourResponse';
-export * from './CurrentWeatherReponse';
+export * from './CurrentReponse';

@@ -65,6 +65,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var node_fetch_1 = require("node-fetch");
 var helpers_1 = require("./helpers");
 var BaseAPI_1 = require("./BaseAPI");
+var Geocoding_1 = require("./geocoding/Geocoding");
 var OpenWeather = /** @class */ (function (_super) {
     __extends(OpenWeather, _super);
     function OpenWeather(_a) {
@@ -81,6 +82,7 @@ var OpenWeather = /** @class */ (function (_super) {
             geoCoordinates: {},
             zipcode: {}
         };
+        _this.geocoding = new Geocoding_1.default({ apiKey: apiKey, units: units, language: language });
         return _this;
     }
     // ***
@@ -145,7 +147,7 @@ var OpenWeather = /** @class */ (function (_super) {
      * @summary Use the built-in API to get by city name (deprecated, but still useable)
      * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
      */
-    OpenWeather.prototype.getByCityNameBuiltIn = function (_a) {
+    OpenWeather.prototype.builtInGetByCityName = function (_a) {
         var _this = this;
         var location = _a.location, queryType = _a.queryType;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -186,32 +188,29 @@ var OpenWeather = /** @class */ (function (_super) {
         var _this = this;
         var location = _a.location, queryType = _a.queryType;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var cityName, state, countryCode, query, request, response, currentWeather, error_2;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var cityName, state, countryCode, coordinates, _a, latitude, longitude, currentWeather, error_2;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _a.trys.push([0, 3, , 4]);
+                        _b.trys.push([0, 2, , 3]);
                         if (!(location === null || location === void 0 ? void 0 : location.cityName) && !this.location.city.cityName) {
                             throw new Error("cityName missing, please pass it via argument or set it using setCityName method");
                         }
                         cityName = (location === null || location === void 0 ? void 0 : location.cityName) || this.location.city.cityName;
                         state = (location === null || location === void 0 ? void 0 : location.state) || this.location.city.state;
                         countryCode = (location === null || location === void 0 ? void 0 : location.countryCode) || this.location.city.countryCode;
-                        query = "q=".concat(cityName).concat(state ? ',' + state : '').concat(countryCode ? ',' + countryCode : '');
-                        request = this.buildURL(queryType, query);
-                        return [4 /*yield*/, (0, node_fetch_1.default)(request)];
+                        return [4 /*yield*/, this.geocoding.getGeoCoordinatesByLocationName(cityName, countryCode, state)];
                     case 1:
-                        response = _a.sent();
-                        return [4 /*yield*/, response.json()];
-                    case 2:
-                        currentWeather = _a.sent();
+                        coordinates = _b.sent();
+                        _a = coordinates[0], latitude = _a.lat, longitude = _a.lon;
+                        currentWeather = this.getByGeoCoordinates({ latitude: latitude, longitude: longitude, queryType: queryType });
                         resolve(currentWeather);
-                        return [3 /*break*/, 4];
-                    case 3:
-                        error_2 = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _b.sent();
                         reject(error_2);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });
@@ -292,7 +291,7 @@ var OpenWeather = /** @class */ (function (_super) {
    *
    * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
    */
-    OpenWeather.prototype.getByZipcode = function (zipcode, queryType, countryCode) {
+    OpenWeather.prototype.builtInGetByZipcode = function (zipcode, queryType, countryCode) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var location_2, query, request, response, currentWeather, error_5;
@@ -320,6 +319,34 @@ var OpenWeather = /** @class */ (function (_super) {
                         reject(error_5);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    OpenWeather.prototype.getByZipcode = function (zipcode, queryType, countryCode) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var location_3, coordinates, currentWeather, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        location_3 = this.location;
+                        if (!zipcode && !location_3.zipcode.zipcode) {
+                            throw new Error("zipcode missing, please pass it via argument or set it using setZipcode method");
+                        }
+                        zipcode = zipcode || location_3.zipcode.zipcode;
+                        return [4 /*yield*/, this.geocoding.getGeoCoordinatesByZipCode(zipcode, countryCode)];
+                    case 1:
+                        coordinates = _a.sent();
+                        currentWeather = this.getByGeoCoordinates({ latitude: coordinates.lat, longitude: coordinates.lon, queryType: queryType });
+                        resolve(currentWeather);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_6 = _a.sent();
+                        reject(error_6);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });

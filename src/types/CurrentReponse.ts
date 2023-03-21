@@ -27,8 +27,11 @@ export interface CurrentWeatherResponse {
     snow?: Precipitation;
     dt: number;
     sys: CurrentWeatherSys;
-    timezone: number; // Shift in seconds from UTC
+    timezone: number; // 
     id: number; // City-ID
     name: string; // City Name
     cod: number; // Internal parameter
 }
+
+// The Name CurrentResponse is subjectivley not a good name to use, but should be kept for backwards compatibility
+export interface CurrentResponse extends CurrentWeatherResponse {}

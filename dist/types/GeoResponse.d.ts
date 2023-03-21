@@ -1,5 +1,6 @@
 import { CountryCode } from "./CountryCode";
-export interface DirectGeoResponse {
+export declare type DirectGeoResponse = DirectGeoResponseItem[];
+export interface DirectGeoResponseItem {
     name: string;
     local_names: {
         [key: string]: string;

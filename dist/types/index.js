@@ -21,4 +21,4 @@ __exportStar(require("./QueryType"), exports);
 __exportStar(require("./Constructor"), exports);
 __exportStar(require("./Methods"), exports);
 __exportStar(require("./ThreeHourResponse"), exports);
-__exportStar(require("./CurrentWeatherReponse"), exports);
+__exportStar(require("./CurrentReponse"), exports);
