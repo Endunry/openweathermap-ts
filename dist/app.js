@@ -55,10 +55,15 @@ var OpenWeather_1 = require("./OpenWeather");
 var helpers_1 = require("./helpers");
 var OpenWeatherMap = /** @class */ (function (_super) {
     __extends(OpenWeatherMap, _super);
-    function OpenWeatherMap() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function OpenWeatherMap(_a) {
+        var apiKey = _a.apiKey, units = _a.units, language = _a.language;
+        return _super.call(this, { apiKey: apiKey, units: units, language: language }) || this;
     }
-    OpenWeatherMap.prototype.getCurrentWeatherByCityName = function (location) {
+    /**
+     * @summary openweathermap.org isnt maintainging the built in Geocoding API anymore, its still usable but not maintained anymore. Better use getCurrentWeatherByCityName instead (uses the seperate Geocoding API)
+     * @deprecated Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin).
+     */
+    OpenWeatherMap.prototype.builtInGetCurrentWeatherByCityName = function (location) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var currentWeather, error_1;
@@ -66,9 +71,9 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.getByCityName({
+                        return [4 /*yield*/, this.builtInGetByCityName({
                                 location: location,
-                                queryType: helpers_1.WEATHER
+                                queryType: helpers_1.CURRENT_WEATHER_ENDPOINT
                             })];
                     case 1:
                         currentWeather = (_a.sent());
@@ -83,6 +88,31 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         }); });
     };
+    /**
+     * @summary uses the geolocation-API to get the current weather by city name
+     * @param location
+     * @returns
+     */
+    OpenWeatherMap.prototype.getCurrentWeatherByCityName = function (location) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var currentWeather;
+            return __generator(this, function (_a) {
+                try {
+                    currentWeather = this.getByCityName({ location: location, queryType: helpers_1.CURRENT_WEATHER_ENDPOINT });
+                    resolve(currentWeather);
+                }
+                catch (error) {
+                    reject(error);
+                }
+                return [2 /*return*/];
+            });
+        }); });
+    };
+    /**
+    * @summary openweathermap.org isnt maintainging the built in Geocoding API anymore, its still usable but not maintained anymore.
+    * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+    */
     OpenWeatherMap.prototype.getCurrentWeatherByCityId = function (cityId) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -95,7 +125,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                                     _a.trys.push([0, 2, , 3]);
                                     return [4 /*yield*/, this.getByCityId({
                                             cityId: cityId,
-                                            queryType: helpers_1.WEATHER
+                                            queryType: helpers_1.CURRENT_WEATHER_ENDPOINT
                                         })];
                                 case 1:
                                     currentWeather = (_a.sent());
@@ -125,7 +155,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                                     return [4 /*yield*/, this.getByGeoCoordinates({
                                             latitude: latitude,
                                             longitude: longitude,
-                                            queryType: helpers_1.WEATHER
+                                            queryType: helpers_1.CURRENT_WEATHER_ENDPOINT
                                         })];
                                 case 1:
                                     currentWeather = (_a.sent());
@@ -142,7 +172,11 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         });
     };
-    OpenWeatherMap.prototype.getCurrentWeatherByZipcode = function (zipcode, countryCode) {
+    /**
+  *
+  * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/weather#builtin)
+  */
+    OpenWeatherMap.prototype.builtInGetCurrentWeatherByZipcode = function (zipcode, countryCode) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
@@ -152,7 +186,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                             switch (_a.label) {
                                 case 0:
                                     _a.trys.push([0, 2, , 3]);
-                                    return [4 /*yield*/, this.getByZipcode(zipcode, helpers_1.WEATHER, countryCode)];
+                                    return [4 /*yield*/, this.builtInGetByZipcode(zipcode, helpers_1.CURRENT_WEATHER_ENDPOINT, countryCode)];
                                 case 1:
                                     currentWeather = (_a.sent());
                                     resolve(currentWeather);
@@ -168,7 +202,37 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         });
     };
-    OpenWeatherMap.prototype.getThreeHourForecastByCityName = function (location) {
+    /**
+     * @summary uses the geolocation-API to get the current weather by zipcode and then uses the geolocation to get the current weather
+     * @param zipcode
+     * @param countryCode
+     * @returns
+     */
+    OpenWeatherMap.prototype.getCurrentWeatherByZipcode = function (zipcode, countryCode) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var currentWeather;
+                        return __generator(this, function (_a) {
+                            try {
+                                currentWeather = this.getByZipcode(zipcode, helpers_1.CURRENT_WEATHER_ENDPOINT, countryCode);
+                                resolve(currentWeather);
+                            }
+                            catch (error) {
+                                reject(error);
+                            }
+                            return [2 /*return*/];
+                        });
+                    }); })];
+            });
+        });
+    };
+    /**
+   *
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
+    OpenWeatherMap.prototype.builtInGetThreeHourForecastByCityName = function (location) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var currentWeather, error_5;
@@ -193,6 +257,26 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         }); });
     };
+    OpenWeatherMap.prototype.getThreeHourForecastByCityName = function (location) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var currentWeather;
+            return __generator(this, function (_a) {
+                try {
+                    currentWeather = this.getByCityName({ location: location, queryType: helpers_1.FORECAST });
+                    resolve(currentWeather);
+                }
+                catch (error) {
+                    reject(error);
+                }
+                return [2 /*return*/];
+            });
+        }); });
+    };
+    /**
+   *
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
     OpenWeatherMap.prototype.getThreeHourForecastByCityId = function (cityId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -244,6 +328,10 @@ var OpenWeatherMap = /** @class */ (function (_super) {
             });
         }); });
     };
+    /**
+   *
+   * @deprecated  Please note that API requests by city name, zip-codes and city id have been deprecated. Although they are still available for use, bug fixing and updates are no longer available for this functionality. Please use Geocoder API if you need automatic convert city names and zip-codes to corrdinates vice versa. (https://openweathermap.org/forecast5#builtin)
+   */
     OpenWeatherMap.prototype.getThreeHourForecastByZipcode = function (zipcode, countryCode) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -254,7 +342,7 @@ var OpenWeatherMap = /** @class */ (function (_super) {
                             switch (_a.label) {
                                 case 0:
                                     _a.trys.push([0, 2, , 3]);
-                                    return [4 /*yield*/, this.getByZipcode(zipcode, helpers_1.FORECAST, countryCode)];
+                                    return [4 /*yield*/, this.builtInGetByZipcode(zipcode, helpers_1.FORECAST, countryCode)];
                                 case 1:
                                     currentWeather = (_a.sent());
                                     return [2 /*return*/, resolve(currentWeather)];

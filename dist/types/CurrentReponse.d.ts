@@ -1,46 +1,30 @@
-declare const data: {
-    coord: {
-        lon: number;
-        lat: number;
-    };
-    weather: {
-        id: number;
-        main: string;
-        description: string;
-        icon: string;
-    }[];
-    base: string;
-    main: {
-        temp: number;
-        feels_like: number;
-        temp_min: number;
-        temp_max: number;
-        pressure: number;
-        humidity: number;
-    };
+import { CountryCode } from "./CountryCode";
+import { Coordinate } from "./Unit";
+import { Base, Clouds, Main, Precipitation, Weather, Wind, Time } from "./WeatherResponse";
+export interface CurrentWeatherSys {
+    type?: number;
+    id?: number;
+    message?: number;
+    country: CountryCode;
+    sunrise: Time;
+    sunset: Time;
+}
+export interface CurrentWeatherResponse {
+    coord: Coordinate;
+    weather: Weather[];
+    base: Base;
+    main: Main;
     visibility: number;
-    wind: {
-        speed: number;
-        deg: number;
-    };
-    clouds: {
-        all: number;
-    };
+    wind: Wind;
+    clouds: Clouds;
+    rain?: Precipitation;
+    snow?: Precipitation;
     dt: number;
-    sys: {
-        type: number;
-        id: number;
-        country: string;
-        sunrise: number;
-        sunset: number;
-    };
+    sys: CurrentWeatherSys;
     timezone: number;
     id: number;
     name: string;
     cod: number;
-};
-declare type Visibility = {
-    visibility?: number;
-};
-export declare type CurrentResponse = typeof data & Visibility;
-export {};
+}
+export interface CurrentResponse extends CurrentWeatherResponse {
+}
